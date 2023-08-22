@@ -16,11 +16,15 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from . import views as main_views  # Import the views from the main PulsePoint configuration app
+from . import (
+    views as main_views,
+)  # Import the views from the main PulsePoint configuration app
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path("", main_views.root_homepage, name="root_home"),  # Root homepage for the entire project
+    path(
+        "", main_views.root_homepage, name="root_home"
+    ),  # Root homepage for the entire project
     path("moodtracker/", include("moodtracker.urls", namespace="moodtracker")),
+    path("community/", include("community.urls", namespace="community")),
 ]
-
