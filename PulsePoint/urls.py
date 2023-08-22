@@ -27,4 +27,5 @@ urlpatterns = [
     ),  # Root homepage for the entire project
     path("moodtracker/", include("moodtracker.urls", namespace="moodtracker")),
     path("community/", include("community.urls", namespace="community")),
+    path("resources/", include("resources.urls", namespace="resources")),
 ]
