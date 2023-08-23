@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from .models import Questionnaire
-from .forms import QuestionnaireForm
+from .forms import QuestionnaireForm, MoodDataForm
 
 
 @login_required
@@ -32,3 +32,21 @@ def questionnaire_view(request):
             form = QuestionnaireForm()
 
         return render(request, "moodtracker/questionnaire.html", {"form": form})
+
+
+@login_required
+def save_mood(request):
+    if request.method == "POST":
+        form = MoodDataForm(request.POST)
+        if form.is_valid():
+            mood_data = form.save(commit=False)
+            mood_data.user = request.user
+            mood_data.save()
+            messages.success(request, "Your mood has been recorded!")
+            return redirect(
+                "moodtracker:mood_graph"
+            )
+    else:
+        form = MoodDataForm()
+
+    return render(request, "moodtracker/save_mood.html", {"form": form})
