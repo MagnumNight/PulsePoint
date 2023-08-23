@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% block title %}Sign Up{% endblock %}
+
+{% block content %}
+    <form method="post" action="{% url 'signup' %}">
+        {% csrf_token %}
+        <h1 style="text-align:center">Sign Up</h1>
+
+        <div class="form-group">
+            <label for="id_first_name">First Name</label>
+            <input type="text" class="form-control" id="id_first_name" name="first_name" placeholder="Enter first name">
+        </div>
+
+        <div class="form-group">
+            <label for="id_last_name">Last Name</label>
+            <input type="text" class="form-control" id="id_last_name" name="last_name" placeholder="Enter last name">
+        </div>
+
+        <div class="form-group">
+            <label for="id_username">Username</label>
+            <input type="text" class="form-control" id="id_username" name="username" placeholder="Enter username">
+        </div>
+
+        <div class="form-group">
+            <label for="id_email">Email</label>
+            <input type="email" class="form-control" id="id_email" name="email" placeholder="Enter email">
+        </div>
+
+        <div class="form-group">
+            <label for="id_password1">Password</label>
+            <input type="password" class="form-control" id="id_password1" name="password1" placeholder="Enter password">
+        </div>
+
+        <div class="form-group">
+            <label for="id_password2">Password (Confirm)</label>
+            <input type="password" class="form-control" id="id_password2" name="password2"
+                   placeholder="Confirm password">
+        </div>
+
+        <br/>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+{% endblock %}
