@@ -5,6 +5,7 @@ PulsePoint is a Django-based web application designed to track users' moods and 
 
 ## Prerequisites
 Python 3.11
+
 Django (version here is 4.2.4)
 
 Virtual environment (optional, but recommended)
