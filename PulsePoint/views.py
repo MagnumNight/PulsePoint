@@ -1,6 +1,8 @@
 from .forms import UserRegisterForm
 from django.shortcuts import render, redirect
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth import logout
 
 
 def root_homepage(request):
@@ -20,3 +22,14 @@ def signup(request):
     else:
         form = UserRegisterForm()
     return render(request, "registration/signup.html", {"form": form})
+
+
+@login_required
+def delete_account(request):
+    if request.method == 'POST':
+        user = request.user
+        logout(request)
+        user.delete()
+        messages.success(request, 'Your account has been successfully deleted.')
+        return redirect('root_home')
+    return render(request, 'registration/delete_account.html')
