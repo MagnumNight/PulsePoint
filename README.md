@@ -53,5 +53,5 @@ Connect, share, and discuss with a community of users.
 #### Resources:
 Allows users to get the help they need.
 
-### License
-This project is licensed under the MIT License - see the LICENSE.txt file for details.
+### License:
+This project is licensed under the Apache License - please look at the LICENSE.txt file for details.
