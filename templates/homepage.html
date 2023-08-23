@@ -1,6 +1,31 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <h1 class="text-center">Welcome to PulsePoint</h1>
-    <p class="lead text-center">Your digital sanctuary for emotional well-being.</p>
+    <div class="jumbotron jumbotron-fluid">
+        <div class="container">
+            <h1 class="display-4 text-center">Welcome to PulsePoint</h1>
+            <p class="lead text-center">Your digital sanctuary for emotional well-being.</p>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            {% for _ in "123456" %}
+                <div class="col-md-4 mb-4">
+                    <!-- Using col-md-4 will create 3 columns on medium screens and above,
+                    making a total of 2 rows for the six boxes -->
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h5 class="card-title text-center">Title</h5>
+                            <p class="card-text">Some content here. This can be a brief description or anything else we
+                                want to display in this box.</p>
+                        </div>
+                        <div class="card-footer">
+                            <a href="#" class="btn btn-danger btn-block">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
 {% endblock %}
