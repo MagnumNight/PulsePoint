@@ -31,4 +31,5 @@ urlpatterns = [
     ),  # This line includes all auth views like login, logout, password reset, etc.
     path("delete_account/", views.delete_account, name="delete_account"),
     path("signup/", views.signup, name="signup"),
+    path("account/settings/", views.account_settings, name="account_settings"),
 ]

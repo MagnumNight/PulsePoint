@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block title %}Account Settings{% endblock %}
+
+{% block content %}
+    <div class="jumbotron jumbotron-fluid">
+        <div class="container">
+            <h1 class="display-4 text-center">Account Settings</h1>
+            <p class="lead text-center">Manage your account preferences and security settings here.</p>
+        </div>
+    </div>
+
+    <div class="container mt-4">
+        <div class="row">
+
+            <!-- Change Password Card -->
+            <div class="col-md-6 mb-4">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h5 class="card-title text-center">Change Password</h5>
+                        <p class="card-text text-center">Update your current password to ensure your account's security.</p>
+                    </div>
+                    <div class="card-footer">
+                        <a href="{% url 'password_change' %}" class="btn btn-danger btn-block">Change Password</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Delete Account Card -->
+            <div class="col-md-6 mb-4">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h5 class="card-title text-center">Delete My Account</h5>
+                        <p class="card-text text-center">Permanently delete your account and all associated data.</p>
+                    </div>
+                    <div class="card-footer">
+                        <a href="{% url 'delete_account' %}" class="btn btn-danger btn-block">Delete Account</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+{% endblock %}

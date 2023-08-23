@@ -26,10 +26,15 @@ def signup(request):
 
 @login_required
 def delete_account(request):
-    if request.method == 'POST':
+    if request.method == "POST":
         user = request.user
         logout(request)
         user.delete()
-        messages.success(request, 'Your account has been successfully deleted.')
-        return redirect('root_home')
-    return render(request, 'registration/delete_account.html')
+        messages.success(request, "Your account has been successfully deleted.")
+        return redirect("root_home")
+    return render(request, "registration/delete_account.html")
+
+
+@login_required
+def account_settings(request):
+    return render(request, "registration/settings.html")
