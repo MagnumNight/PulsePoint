@@ -13,15 +13,18 @@
     <div class="container mt-4">
         <div class="row">
 
-            <!-- Change Password Card -->
+            <!-- Update Information Card -->
             <div class="col-md-6 mb-4">
                 <div class="card h-100">
                     <div class="card-body">
-                        <h5 class="card-title text-center">Change Password</h5>
-                        <p class="card-text text-center">Update your current password to ensure your account's security.</p>
+                        <h5 class="card-title text-center">Update Information</h5>
+                        <p class="card-text text-center">Modify your information to keep your account
+                            up-to-date.</p>
                     </div>
                     <div class="card-footer">
-                        <a href="{% url 'password_change' %}" class="btn btn-danger btn-block">Change Password</a>
+                        <!-- Trigger the modal when clicked -->
+                        <a href="#" class="btn btn-danger btn-block" data-toggle="modal"
+                           data-target="#nameUpdateModal">Update Info</a>
                     </div>
                 </div>
             </div>
@@ -34,11 +37,36 @@
                         <p class="card-text text-center">Permanently delete your account and all associated data.</p>
                     </div>
                     <div class="card-footer">
-                        <a href="{% url 'delete_account' %}" class="btn btn-danger btn-block">Delete Account</a>
+                        <a href="{% url 'delete_account' %}" class="btn btn-primary btn-block">Delete Account</a>
                     </div>
                 </div>
             </div>
 
+        </div>
+
+        <!-- Update Information Modal Structure -->
+        <div class="modal fade" id="nameUpdateModal" tabindex="-1" aria-labelledby="nameUpdateModalLabel"
+             aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="nameUpdateModalLabel">Update Information</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <form method="post" action="{% url 'account_settings' %}">
+                        {% csrf_token %}
+                        <div class="modal-body">
+                            {{ form.as_p }}
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-danger">Update Info</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
         </div>
     </div>
 {% endblock %}

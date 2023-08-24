@@ -37,4 +37,19 @@ def delete_account(request):
 
 @login_required
 def account_settings(request):
-    return render(request, "registration/settings.html")
+    form = UserRegisterForm(instance=request.user)
+    return render(request, "registration/settings.html", {"form": form})
+
+
+@login_required
+def update_information(request):
+    if request.method == "POST":
+        form = UserRegisterForm(request.POST, instance=request.user)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Your information has been successfully updated.")
+            return redirect("account_settings")
+    else:
+        form = UserRegisterForm(instance=request.user)
+
+    return render(request, "registration/settings.html", {"form": form})
