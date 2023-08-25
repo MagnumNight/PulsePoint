@@ -1,8 +1,14 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="{% static 'icons/favicon.svg' %}">
+    <link rel="alternate icon" href="{% static 'icons/favicon.png' %}">
+
     <title>{% block title %}Pulse Point{% endblock %}</title>
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
@@ -10,7 +16,7 @@
     <style>
         .navbar-dark .navbar-brand.dropdown-toggle:active,
         .navbar-dark .dropdown-item:active {
-            background-color: #c9302c;
+            background-color: #38B6FF;
         }
 
         .navbar-dark .navbar-brand.dropdown-toggle:focus {

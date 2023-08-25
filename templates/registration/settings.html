@@ -23,7 +23,7 @@
                     </div>
                     <div class="card-footer">
                         <!-- Trigger the modal when clicked -->
-                        <a href="#" class="btn btn-danger btn-block" data-toggle="modal"
+                        <a href="#" class="btn btn-primary btn-block" data-toggle="modal"
                            data-target="#nameUpdateModal">Update Info</a>
                     </div>
                 </div>
@@ -37,7 +37,7 @@
                         <p class="card-text text-center">Permanently delete your account and all associated data.</p>
                     </div>
                     <div class="card-footer">
-                        <a href="{% url 'delete_account' %}" class="btn btn-primary btn-block">Delete Account</a>
+                        <a href="{% url 'delete_account' %}" class="btn btn-danger btn-block">Delete Account</a>
                     </div>
                 </div>
             </div>
@@ -62,7 +62,7 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-danger">Update Info</button>
+                            <button type="submit" class="btn btn-primary">Update Info</button>
                         </div>
                     </form>
                 </div>
