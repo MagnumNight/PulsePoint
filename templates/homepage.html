@@ -1,12 +1,34 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <div class="jumbotron jumbotron-fluid jumbotron-pulse">
+    <div class="jumbotron jumbotron-fluid" style="margin-top: 150px;">
         <div class="container">
             <h1 class="display-4 text-center">Welcome to PulsePoint</h1>
             <p class="lead text-center">Your digital sanctuary for emotional well-being.</p>
         </div>
     </div>
+
+    <!-- slider_area_start -->
+    <div class="slider_area">
+        <div class="slider_active owl-carousel">
+            <div class="single_slider  d-flex align-items-center slider_bg_1 overlay">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xl-12">
+                            <div class="slider_text ">
+                                <span>the best medical center</span>
+                                <h3><span>Bringing health</span> <br>
+                                    to life for the whole family.</h3>
+                                <a href="#" class="boxed-btn5">Discover More
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- slider_area_end -->
 
     <div class="container">
         <div class="row">
@@ -28,4 +50,6 @@
             {% endfor %}
         </div>
     </div>
+
 {% endblock %}
+
