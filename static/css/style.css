@@ -576,9 +576,21 @@ body {
 );
 }
 
+
+.main-menu nav ul#navigation li a {
+    font-size: 1.4rem !important;
+}
+
+
 @media (max-width: 767px) {
     .header-area .main-header-area {
         padding: 10px 10px;
+    }
+    .header-area .main-header-area .logo-img {
+        text-align: left;
+    }
+    .main-menu nav ul#navigation li a {
+        font-size: 1.1rem!important; /* Increased from 1.1rem */
     }
 }
 
@@ -586,17 +598,11 @@ body {
     .header-area .main-header-area {
         padding: 10px 10px;
     }
-}
-
-@media (max-width: 767px) {
     .header-area .main-header-area .logo-img {
         text-align: left;
     }
-}
-
-@media (min-width: 768px) and (max-width: 991px) {
-    .header-area .main-header-area .logo-img {
-        text-align: left;
+    .main-menu nav ul#navigation li a {
+        font-size: 1.2rem!important; /* Increased from 1.2rem */
     }
 }
 
@@ -604,19 +610,14 @@ body {
     .header-area .main-header-area .logo-img {
         text-align: left;
     }
-}
-
-@media (max-width: 767px) {
-    .header-area .main-header-area .logo-img img {
-        width: 70px;
+    .main-menu nav ul#navigation li a {
+        font-size: 1.3rem!important; /* Increased from 1.3rem */
     }
 }
 
-@media (min-width: 768px) and (max-width: 991px) {
-    .header-area .main-header-area .logo-img img {
-        width: 70px;
-    }
-}
+
+
+
 
 .header-area .main-header-area .book_room {
     display: -webkit-box;
