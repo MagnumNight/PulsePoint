@@ -4,7 +4,7 @@
 {% block content %}
     <form method="post" action="{% url 'signup' %}">
         {% csrf_token %}
-        <div class="jumbotron jumbotron-fluid">
+        <div class="jumbotron jumbotron-fluid jumbotron-pulse">
             <div class="container">
                 <h1 class="display-4 text-center">Sign Up</h1>
             </div>
@@ -42,6 +42,6 @@
         </div>
 
         <br/>
-        <button type="submit" class="btn btn-danger mb-4">Submit</button>
+        <button type="submit" class="btn btn-pulse mb-4">Submit</button>
     </form>
 {% endblock %}
