@@ -586,11 +586,13 @@ body {
     .header-area .main-header-area {
         padding: 10px 10px;
     }
+
     .header-area .main-header-area .logo-img {
         text-align: left;
     }
+
     .main-menu nav ul#navigation li a {
-        font-size: 1.1rem!important; /* Increased from 1.1rem */
+        font-size: 1.1rem !important; /* Increased from 1.1rem */
     }
 }
 
@@ -598,11 +600,13 @@ body {
     .header-area .main-header-area {
         padding: 10px 10px;
     }
+
     .header-area .main-header-area .logo-img {
         text-align: left;
     }
+
     .main-menu nav ul#navigation li a {
-        font-size: 1.2rem!important; /* Increased from 1.2rem */
+        font-size: 1.2rem !important; /* Increased from 1.2rem */
     }
 }
 
@@ -610,13 +614,11 @@ body {
     .header-area .main-header-area .logo-img {
         text-align: left;
     }
+
     .main-menu nav ul#navigation li a {
-        font-size: 1.3rem!important; /* Increased from 1.3rem */
+        font-size: 1.3rem !important; /* Increased from 1.3rem */
     }
 }
-
-
-
 
 
 .header-area .main-header-area .book_room {
@@ -1201,6 +1203,14 @@ body {
 
 .jumbotron-pulse {
     background-color: rgba(56, 182, 255, 0.9);
+}
+
+.modal-backdrop {
+    z-index: 2000 !important;
+}
+
+.modal {
+    z-index: 2050 !important;
 }
 
 
