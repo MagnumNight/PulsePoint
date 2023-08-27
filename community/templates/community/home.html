@@ -1,8 +1,40 @@
 {% extends "base.html" %}
-
+{% load static %}
 {% block title %}Community{% endblock %}
-
 {% block content %}
-    <h1 class="text-center">PulsePoint</h1>
-    <p class="lead text-center">Community page</p>
+
+    <!-- section  -->
+    <div class="quality_area">
+        <div class="container">
+            <div class="row justify-content-center ">
+                <div class="col-lg-6">
+                    <div class="section_title mb-55 text-center">
+                        <h3>Community</h3>
+                        <p>A place to share ideas.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                {% for _ in "123456" %}
+                    <div class="col-lg-4 col-md-6">
+                        <!-- Wrap the box content inside an anchor tag -->
+                        <a href="#" class="box-link">
+                            <div class="single_quality">
+                                <!-- We can replace the icons here -->
+                                <div class="icon">
+                                    <i class="flaticon-customer-service"></i>
+                                </div>
+                                <h3 class="card-title text-center">Title</h3>
+                                <p class="card-text">Some content here. This can be a brief description or anything else
+                                    we
+                                    want to display in this box.</p>
+                            </div>
+                        </a>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    <!-- section  -->
+
 {% endblock %}
