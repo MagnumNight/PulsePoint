@@ -2,7 +2,7 @@ from .forms import UserRegisterForm
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth import logout
+from django.contrib.auth import logout, login
 
 
 def root_homepage(request):
@@ -13,12 +13,12 @@ def signup(request):
     if request.method == "POST":
         form = UserRegisterForm(request.POST)
         if form.is_valid():
-            form.save()
+            user = form.save()
             username = form.cleaned_data.get("username")
-            messages.success(
-                request, f"Account created for {username}! You can now login."
+            login(request, user)  # Log in the user
+            return render(
+                request, "registration/signup_success.html", {"username": username}
             )
-            return redirect("login")
     else:
         form = UserRegisterForm()
     return render(request, "registration/signup.html", {"form": form})

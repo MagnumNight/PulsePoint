@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block title %}Account Created{% endblock %}
+
+{% block content %}
+    <!-- Title section -->
+    <div class="quality_area">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-6">
+                    <div class="section_title mb-55 text-center">
+                        <h3>Account Created!</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container mt-4">
+        <div class="row justify-content-center">
+
+            <!-- Add Mood Section -->
+            <div class="col-md-6 mb-4">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h5 class="card-title text-center">Continue to Questionnaire</h5>
+                        <p class="card-text text-center">Tell us more about you!</p>
+                    </div>
+                    <div class="card-footer">
+                        <a href="{% url 'moodtracker:questionnaire' %}" class="btn btn-pulse btn-block">Continue</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+{% endblock %}

@@ -59,8 +59,12 @@ def save_mood(request):
     return render(request, "moodtracker/save_mood.html", {"form": form})
 
 
-# New view for mood graph
 @login_required
 def mood_graph_view(request):
-    # For now, just rendering a placeholder template.
-    return render(request, "moodtracker/mood_graph.html")
+    mood_data = MoodData.objects.filter(user=request.user).order_by("date")
+    mood_dates = [data.date.strftime("%Y-%m-%d") for data in mood_data]
+    mood_emojis = [data.mood_emoji for data in mood_data]
+
+    context = {"mood_dates": mood_dates, "mood_emojis": mood_emojis}
+
+    return render(request, "moodtracker/mood_graph.html", context)

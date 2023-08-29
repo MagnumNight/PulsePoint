@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+
 {% block title %}Initial Mood Questionnaire{% endblock %}
 
 {% block content %}
@@ -9,7 +10,7 @@
                 <div class="col-lg-6">
                     <div class="section_title mb-55 text-center">
                         <h3>Initial Mood Questionnaire</h3>
-                        <p>How were you feeling when you first joined?</p>
+                        <p>Help us find your Pulse</p>
                     </div>
                 </div>
             </div>
@@ -23,23 +24,15 @@
             <div class="col-md-6 mb-4">
                 <div class="card h-100">
                     <div class="card-body">
-                        <h5 class="card-title text-center">How did you feel when you first joined?</h5>
+                        <h5 class="card-title text-center">How are you feeling today?</h5>
                         <form method="post">
                             {% csrf_token %}
                             <div class="text-center">
                                 <label for="id_mood_rating">Mood:</label>
-                                <span id="selectedEmoji" onclick="toggleEmojiPopup()">🙂 Select Emoji</span>
-                                <!-- Default emoji -->
-
+                                <span id="selectedEmoji" data-toggle="modal"
+                                      data-target="#emojiModal">🙂 Select Emoji</span>
                                 <!-- Hidden field to store the actual value for the form submission -->
                                 <input type="hidden" name="mood_rating" id="id_mood_rating" value="">
-
-                                <!-- Emoji popup (hidden by default) -->
-                                <div id="emoji-popup" style="display: none;">
-                                    <!-- Add emojis with their respective values. -->
-                                    <span onclick="selectEmoji('🤩', 'ecstatic')">🤩 Ecstatic</span>
-                                    <!-- ... (all other emojis here) ... -->
-                                </div>
                             </div>
                             <br>
                             <div class="card-footer">
@@ -53,16 +46,44 @@
         </div>
     </div>
 
-    <script>
-        function toggleEmojiPopup() {
-            const popup = document.getElementById("emoji-popup");
-            popup.style.display = popup.style.display === "none" ? "block" : "none";
-        }
+    <!-- Emoji Modal -->
+    <div class="modal fade" id="emojiModal" tabindex="-1" role="dialog" aria-labelledby="emojiModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="emojiModalLabel">Select your mood</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body text-center">
+                    <!-- Emojis with their respective values -->
+                    <span onclick="selectEmoji('🤩', 'ecstatic')">🤩 Ecstatic</span>
+                    <span onclick="selectEmoji('😁', 'happy')">😁 Happy</span>
+                    <span onclick="selectEmoji('😐', 'neutral')">😐 Neutral</span>
+                    <span onclick="selectEmoji('😕', 'confused')">😕 Confused</span>
+                    <span onclick="selectEmoji('😟', 'worried')">😟 Worried</span>
+                    <span onclick="selectEmoji('😢', 'sad')">😢 Sad</span>
+                    <span onclick="selectEmoji('😭', 'crying')">😭 Crying</span>
+                    <span onclick="selectEmoji('😞', 'disappointed')">😞 Disappointed</span>
+                    <span onclick="selectEmoji('😡', 'angry')">😡 Angry</span>
+                    <span onclick="selectEmoji('😤', 'frustrated')">😤 Frustrated</span>
+                    <span onclick="selectEmoji('😎', 'confident')">😎 Confident</span>
+                    <span onclick="selectEmoji('😖', 'annoyed')">😖 Annoyed</span>
+                    <span onclick="selectEmoji('😓', 'stressed')">😓 Stressed</span>
+                    <span onclick="selectEmoji('😌', 'relieved')">😌 Relieved</span>
+                    <span onclick="selectEmoji('🤔', 'thinking')">🤔 Thinking</span>
+                </div>
+            </div>
+        </div>
+    </div>
 
+    <script>
         function selectEmoji(emoji, moodString) {
             document.getElementById("selectedEmoji").innerText = emoji;
             document.getElementById("id_mood_rating").value = moodString;
-            toggleEmojiPopup();
+            $('#emojiModal').modal('hide');  // Using Bootstrap's jQuery method to hide the modal
         }
     </script>
 {% endblock %}
