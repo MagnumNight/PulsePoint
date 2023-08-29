@@ -1,7 +1,8 @@
+import datetime
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-from .models import Questionnaire
+from .models import Questionnaire, MoodData
 from .forms import QuestionnaireForm, MoodDataForm
 
 
@@ -39,14 +40,27 @@ def save_mood(request):
     if request.method == "POST":
         form = MoodDataForm(request.POST)
         if form.is_valid():
-            mood_data = form.save(commit=False)
-            mood_data.user = request.user
-            mood_data.save()
-            messages.success(request, "Your mood has been recorded!")
-            return redirect(
-                "moodtracker:mood_graph"
+            mood_data, created = MoodData.objects.update_or_create(
+                user=request.user,
+                date=datetime.date.today(),
+                defaults={
+                    "mood_rating": form.cleaned_data["mood_rating"],
+                    "mood_emoji": form.cleaned_data.get("mood_emoji", "🙂"),
+                },
             )
+            if created:
+                messages.success(request, "Your mood has been recorded!")
+            else:
+                messages.info(request, "Your mood for this date has been updated!")
+            return redirect("moodtracker:home")
     else:
         form = MoodDataForm()
 
     return render(request, "moodtracker/save_mood.html", {"form": form})
+
+
+# New view for mood graph
+@login_required
+def mood_graph_view(request):
+    # For now, just rendering a placeholder template.
+    return render(request, "moodtracker/mood_graph.html")

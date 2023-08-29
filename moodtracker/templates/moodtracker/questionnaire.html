@@ -1,9 +1,68 @@
 {% extends "base.html" %}
+{% block title %}Initial Mood Questionnaire{% endblock %}
+
 {% block content %}
-    <h2>Please fill out the questionnaire</h2>
-    <form method="POST">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit" class="btn btn-pulse">Submit</button>
-    </form>
+    <!-- Title section -->
+    <div class="quality_area">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-6">
+                    <div class="section_title mb-55 text-center">
+                        <h3>Initial Mood Questionnaire</h3>
+                        <p>How were you feeling when you first joined?</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container mt-4">
+        <div class="row justify-content-center">
+
+            <!-- Mood Questionnaire Form -->
+            <div class="col-md-6 mb-4">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h5 class="card-title text-center">How did you feel when you first joined?</h5>
+                        <form method="post">
+                            {% csrf_token %}
+                            <div class="text-center">
+                                <label for="id_mood_rating">Mood:</label>
+                                <span id="selectedEmoji" onclick="toggleEmojiPopup()">🙂 Select Emoji</span>
+                                <!-- Default emoji -->
+
+                                <!-- Hidden field to store the actual value for the form submission -->
+                                <input type="hidden" name="mood_rating" id="id_mood_rating" value="">
+
+                                <!-- Emoji popup (hidden by default) -->
+                                <div id="emoji-popup" style="display: none;">
+                                    <!-- Add emojis with their respective values. -->
+                                    <span onclick="selectEmoji('🤩', 'ecstatic')">🤩 Ecstatic</span>
+                                    <!-- ... (all other emojis here) ... -->
+                                </div>
+                            </div>
+                            <br>
+                            <div class="card-footer">
+                                <button type="submit" class="btn btn-pulse btn-block">Submit</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        function toggleEmojiPopup() {
+            const popup = document.getElementById("emoji-popup");
+            popup.style.display = popup.style.display === "none" ? "block" : "none";
+        }
+
+        function selectEmoji(emoji, moodString) {
+            document.getElementById("selectedEmoji").innerText = emoji;
+            document.getElementById("id_mood_rating").value = moodString;
+            toggleEmojiPopup();
+        }
+    </script>
 {% endblock %}
