@@ -1,3 +1,8 @@
+<!--
+    Modified by: Andrew Roney
+    Date: 08/30/2023
+-->
+
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
@@ -18,7 +23,11 @@
     <link rel="stylesheet" href="{% static 'css/flaticon.css' %}">
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
 
-
+    <style>
+        header {
+            margin-bottom: 10em;
+        }
+    </style>
 </head>
 
 <header>
@@ -37,7 +46,12 @@
                     <div class="col-xl-9 col-lg-9">
                         <div class="menu_wrap d-none d-lg-block">
                             <div class="menu_wrap_inner d-flex align-items-center justify-content-end">
-                                <div class="main-menu">
+                                <!-- Mobile Nav Toggle Button -->
+                                <div class="navbar-toggler" data-toggle="collapse" data-target="#myNavbar">
+                                    <span class="navbar-toggler-icon"></span>
+                                </div>
+                                <!-- Nav Menu -->
+                                <div class="main-menu mobile_menu">
                                     <nav>
                                         <ul id="navigation">
                                             <li><a href="{% url 'root_home' %}">Home</a></li>
@@ -57,6 +71,7 @@
                                             {% endif %}
                                         </ul>
                                     </nav>
+                                      
                                 </div>
                             </div>
                         </div>
