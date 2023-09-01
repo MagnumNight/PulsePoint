@@ -18,22 +18,94 @@
 
     <div class="container mt-4">
         <div class="row justify-content-center">
-
-            <!-- Update Mood Form -->
+            <!-- Mood Questionnaire Form -->
             <div class="col-md-6 mb-4">
                 <div class="card h-100">
                     <div class="card-body">
-                        <h5 class="card-title text-center">How are you feeling today?</h5>
+                        <h5 class="card-title text-center">Answer these questions about your mood:</h5>
                         <form method="post">
                             {% csrf_token %}
-                            <div class="text-center">
-                                <label for="mood_rating">Mood:</label>
-                                <span id="selectedEmoji" data-toggle="modal"
-                                      data-target="#emojiModal">🙂 Select Emoji</span>
-                                <!-- Hidden field to store the actual value for the form submission -->
-                                <input type="hidden" name="mood_rating" id="mood_rating" value="">
+
+                            <!-- Question 1 -->
+                            <div class="question-block">
+                                <label for="question1">How happy are you?</label><br>
+                                <span id="label1">Neutral</span><br>
+                                <input type="range" min="1" max="5" value="3" id="question1" name="happiness_level"
+                                       oninput="updateLabel('label1', this.value)">
                             </div>
-                            <br>
+
+                            <!-- Question 2 -->
+                            <div class="question-block">
+                                <label for="question2">How stressed are you?</label><br>
+                                <span id="label2">Neutral</span><br>
+                                <input type="range" min="1" max="5" value="3" id="question2" name="stress_level"
+                                       oninput="updateLabel('label2', this.value)">
+                            </div>
+
+                            <!-- Question 3 -->
+                            <div class="question-block">
+                                <label for="question3">How relaxed are you?</label><br>
+                                <span id="label3">Neutral</span><br>
+                                <input type="range" min="1" max="5" value="3" id="question3" name="relaxation_level"
+                                       oninput="updateLabel('label3', this.value)">
+                            </div>
+
+                            <!-- Question 4 -->
+                            <div class="question-block">
+                                <label for="question4">How energetic do you feel?</label><br>
+                                <span id="label4">Neutral</span><br>
+                                <input type="range" min="1" max="5" value="3" id="question4" name="energy_level"
+                                       oninput="updateLabel('label4', this.value)">
+                            </div>
+
+                            <!-- Question 5 -->
+                            <div class="question-block">
+                                <label for="question5">Are you feeling creative?</label><br>
+                                <span id="label5">Neutral</span><br>
+                                <input type="range" min="1" max="5" value="3" id="question5" name="creativity_level"
+                                       oninput="updateLabel('label5', this.value)">
+                            </div>
+
+                            <!-- Question 6 -->
+                            <div class="question-block">
+                                <label for="question6">How focused are you?</label><br>
+                                <span id="label6">Neutral</span><br>
+                                <input type="range" min="1" max="5" value="3" id="question6" name="focus_level"
+                                       oninput="updateLabel('label6', this.value)">
+                            </div>
+
+                            <!-- Question 7 -->
+                            <div class="question-block">
+                                <label for="question7">Are you feeling social?</label><br>
+                                <span id="label7">Neutral</span><br>
+                                <input type="range" min="1" max="5" value="3" id="question7" name="social_level"
+                                       oninput="updateLabel('label7', this.value)">
+                            </div>
+
+                            <!-- Question 8 -->
+                            <div class="question-block">
+                                <label for="question8">How motivated are you?</label><br>
+                                <span id="label8">Neutral</span><br>
+                                <input type="range" min="1" max="5" value="3" id="question8" name="motivation_level"
+                                       oninput="updateLabel('label8', this.value)">
+                            </div>
+
+                            <!-- Question 9 -->
+                            <div class="question-block">
+                                <label for="question9">Are you feeling confident?</label><br>
+                                <span id="label9">Neutral</span><br>
+                                <input type="range" min="1" max="5" value="3" id="question9" name="confidence_level"
+                                       oninput="updateLabel('label9', this.value)">
+                            </div>
+
+                            <!-- Question 10 -->
+                            <div class="question-block">
+                                <label for="question10">How content are you?</label><br>
+                                <span id="label10">Neutral</span><br>
+                                <input type="range" min="1" max="5" value="3" id="question10" name="contentment_level"
+                                       oninput="updateLabel('label10', this.value)">
+                            </div>
+
                             <div class="card-footer">
                                 <button type="submit" class="btn btn-pulse btn-block">Submit</button>
                             </div>
@@ -41,48 +113,31 @@
                     </div>
                 </div>
             </div>
-
-        </div>
-    </div>
-
-    <!-- Emoji Modal -->
-    <div class="modal fade" id="emojiModal" tabindex="-1" role="dialog" aria-labelledby="emojiModalLabel"
-         aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="emojiModalLabel">Select your mood</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body text-center">
-                    <!-- Emojis with their respective values -->
-                    <span onclick="selectEmoji('🤩', 'ecstatic')">🤩 Ecstatic</span>
-                    <span onclick="selectEmoji('😁', 'happy')">😁 Happy</span>
-                    <span onclick="selectEmoji('😐', 'neutral')">😐 Neutral</span>
-                    <span onclick="selectEmoji('😕', 'confused')">😕 Confused</span>
-                    <span onclick="selectEmoji('😟', 'worried')">😟 Worried</span>
-                    <span onclick="selectEmoji('😢', 'sad')">😢 Sad</span>
-                    <span onclick="selectEmoji('😭', 'crying')">😭 Crying</span>
-                    <span onclick="selectEmoji('😞', 'disappointed')">😞 Disappointed</span>
-                    <span onclick="selectEmoji('😡', 'angry')">😡 Angry</span>
-                    <span onclick="selectEmoji('😤', 'frustrated')">😤 Frustrated</span>
-                    <span onclick="selectEmoji('😎', 'confident')">😎 Confident</span>
-                    <span onclick="selectEmoji('😖', 'annoyed')">😖 Annoyed</span>
-                    <span onclick="selectEmoji('😓', 'stressed')">😓 Stressed</span>
-                    <span onclick="selectEmoji('😌', 'relieved')">😌 Relieved</span>
-                    <span onclick="selectEmoji('🤔', 'thinking')">🤔 Thinking</span>
-                </div>
-            </div>
         </div>
     </div>
 
     <script>
-        function selectEmoji(emoji, moodString) {
-            document.getElementById("selectedEmoji").innerText = emoji;
-            document.getElementById("mood_rating").value = moodString;
-            $('#emojiModal').modal('hide');  // Using Bootstrap's jQuery method to hide the modal
+        function updateLabel(labelId, value) {
+            const mapping = {
+                1: 'Not at all',
+                2: 'Not really',
+                3: 'Neutral',
+                4: 'Somewhat',
+                5: 'Completely'
+            };
+            document.getElementById(labelId).innerText = mapping[value];
         }
     </script>
+
+    <style>
+        .question-block {
+            margin-bottom: 20px;
+        }
+
+        .question-block label {
+            font-weight: bold;
+        }
+
+    </style>
+
 {% endblock %}

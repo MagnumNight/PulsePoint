@@ -7,6 +7,9 @@
 
     <title>{% block title %}Pulse Point{% endblock %}</title>
 
+    <!-- Plotly -->
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="{% static 'icons/favicon.svg' %}">
     <link rel="alternate icon" href="{% static 'icons/favicon.png' %}">
@@ -18,8 +21,9 @@
     <link rel="stylesheet" href="{% static 'css/flaticon.css' %}">
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
 
-
 </head>
+
+<body>
 
 <header>
     <div class="header-area">
@@ -69,14 +73,25 @@
 
 
 <div class="container mt-5">
+    <!-- Added this for messages, if any -->
+    {% if messages %}
+        {% for message in messages %}
+            <script type="text/javascript">
+                alert("{{ message }}");
+            </script>
+        {% endfor %}
+    {% endif %}
     {% block content %}
     {% endblock %}
 </div>
 
-<script src="{% static 'js/jquery-3.5.1.slim.min.js' %}"></script>
+<!-- jQuery -->
+<script src="{% static 'js/jquery-3.7.1.min.js' %}"></script>
 <!-- Popper.js -->
 <script src="{% static 'js/popper.min.js' %}"></script>
 <!-- Bootstrap's JavaScript -->
 <script src="{% static 'js/bootstrap.min.js' %}"></script>
+
+</body>
 
 </html>

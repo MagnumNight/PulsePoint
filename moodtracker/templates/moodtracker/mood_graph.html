@@ -18,57 +18,17 @@
 
     <div class="container mt-4">
         <div class="row justify-content-center">
-
-            <!-- Mood graph -->
-            <div class="col-md-12 mb-4">
-                <div class="card h-100">
-                    <div class="card-body">
-                        <!-- Insert the canvas for the graph here -->
-                        <canvas id="moodChart"></canvas>
+            <!-- Loop through plot_divs to display all graphs -->
+            {% for metric, div in plot_divs.items %}
+                <div class="col-md-12 mb-4">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <!-- Insert Plotly graph here -->
+                            {{ div|safe }}
+                        </div>
                     </div>
                 </div>
-            </div>
-
+            {% endfor %}
         </div>
     </div>
-
-    <!-- Include the Chart.js library -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <!-- Initialize and display the chart -->
-    <script>
-        var ctx = document.getElementById('moodChart').getContext('2d');
-
-        var moodData = {
-            labels: {{ mood_dates|safe }},
-            datasets: [{
-                label: 'Mood Over Time',
-                data: {{ mood_emojis|safe }},
-                borderColor: 'rgba(75, 192, 192, 1)',
-                borderWidth: 1,
-                fill: false
-            }]
-        };
-
-        var moodOptions = {
-            scales: {
-                x: {
-                    type: 'timeseries'
-                },
-                y: {
-                    beginAtZero: true,
-                    ticks: {
-                        callback: function (value, index, values) {
-                            return value;  // This displays the actual emoji on the Y-axis
-                        }
-                    }
-                }
-            }
-        };
-
-        var moodChart = new Chart(ctx, {
-            type: 'line',
-            data: moodData,
-            options: moodOptions
-        });
-    </script>
 {% endblock %}
