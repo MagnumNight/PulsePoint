@@ -17,6 +17,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from . import views
+from .views import activate  
 
 urlpatterns = [
     path("admin/", admin.site.urls),
@@ -31,5 +32,8 @@ urlpatterns = [
     ),  # This line includes all auth views like login, logout, password reset, etc.
     path("delete_account/", views.delete_account, name="delete_account"),
     path("signup/", views.signup, name="signup"),
+    # path("login/", views.login, name="login"),
     path("account/settings/", views.account_settings, name="account_settings"),
+    path('activate/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/',  
+        activate, name='activate')
 ]
