@@ -17,19 +17,45 @@
             <div class="row">
                 {% for _ in "123456" %}
                     <div class="col-lg-4 col-md-6">
-                        <!-- Wrap the box content inside an anchor tag -->
-                        <a href="#" class="box-link">
-                            <div class="single_quality">
-                                <!-- We can replace the icons here -->
-                                <div class="icon">
-                                    <i class="fa fa-search-plus" aria-hidden="true"></i>
+                        {% if forloop.counter == 1 %}
+                            <!-- Special box for the first card -->
+                            <a href="https://adaa.org/understanding-anxiety/generalized-anxiety-disorder-gad"
+                               class="box-link">
+                                <div class="single_quality">
+                                    <div class="icon">
+                                        <i class="fa-solid fa-face-sad-tear" aria-hidden="true"></i>
+                                    </div>
+                                    <h3 class="card-title text-center">GAD Help</h3>
+                                    <p class="card-text">Learn more about Generalized Anxiety Disorder and find
+                                        resources to help manage it.</p>
                                 </div>
-                                <h3 class="card-title text-center">Title</h3>
-                                <p class="card-text">Some content here. This can be a brief description or anything else
-                                    we
-                                    want to display in this box.</p>
-                            </div>
-                        </a>
+                            </a>
+                        {% elif forloop.counter == 2 %}
+                            <!-- Special box for the second card -->
+                            <a href="https://www.maketheconnection.net/conditions/ptsd/"
+                               class="box-link">
+                                <div class="single_quality">
+                                    <div class="icon">
+                                        <i class="fa-solid fa-fighter-jet" aria-hidden="true"></i>
+                                    </div>
+                                    <h3 class="card-title text-center">PTSD Help</h3>
+                                    <p class="card-text">There are many ways PTSD can impact your everyday life. Learn
+                                        how to manage PTSD.</p>
+                                </div>
+                            </a>
+                        {% else %}
+                            <!-- Default box for other cards -->
+                            <a href="#" class="box-link">
+                                <div class="single_quality">
+                                    <div class="icon">
+                                        <i class="fa fa-search-plus" aria-hidden="true"></i>
+                                    </div>
+                                    <h3 class="card-title text-center">Title</h3>
+                                    <p class="card-text">Some content here. This can be a brief description or anything
+                                        else we want to display in this box.</p>
+                                </div>
+                            </a>
+                        {% endif %}
                     </div>
                 {% endfor %}
             </div>
