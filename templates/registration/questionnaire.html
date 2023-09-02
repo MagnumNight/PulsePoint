@@ -1,0 +1,157 @@
+{% extends "base.html" %}
+
+{% block title %}Initial Mood Questionnaire{% endblock %}
+
+{% block content %}
+    <!-- Title section -->
+    <div class="quality_area">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-6">
+                    <div class="section_title mb-55 text-center">
+                        <h3>Initial Mood Questionnaire</h3>
+                        <p>Help us find your Pulse</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container mt-4">
+        <div class="row justify-content-center">
+            <!-- Mood Questionnaire Form -->
+            <div class="col-md-6 mb-4">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h5 class="card-title text-center">Answer these questions about your mood:</h5>
+                        <form method="post">
+                            {% csrf_token %}
+
+                            <!-- Question 1 -->
+                            <div class="question-block">
+                                <label for="question1">How happy are you?</label><br>
+                                <span id="label1">Neutral</span><br>
+                                <input type="range" min="1" max="5" value="3" id="question1" name="happiness_level"
+                                       oninput="updateLabel('label1', this.value)">
+                            </div>
+
+                            <!-- Question 2 -->
+                            <div class="question-block">
+                                <label for="question2">How stressed are you?</label><br>
+                                <span id="label2">Neutral</span><br>
+                                <input type="range" min="1" max="5" value="3" id="question2" name="stress_level"
+                                       oninput="updateLabel('label2', this.value)">
+                            </div>
+
+                            <!-- Question 3 -->
+                            <div class="question-block">
+                                <label for="question3">How relaxed are you?</label><br>
+                                <span id="label3">Neutral</span><br>
+                                <input type="range" min="1" max="5" value="3" id="question3" name="relaxation_level"
+                                       oninput="updateLabel('label3', this.value)">
+                            </div>
+
+                            <!-- Question 4 -->
+                            <div class="question-block">
+                                <label for="question4">How energetic do you feel?</label><br>
+                                <span id="label4">Neutral</span><br>
+                                <input type="range" min="1" max="5" value="3" id="question4" name="energy_level"
+                                       oninput="updateLabel('label4', this.value)">
+                            </div>
+
+                            <!-- Question 5 -->
+                            <div class="question-block">
+                                <label for="question5">Are you feeling creative?</label><br>
+                                <span id="label5">Neutral</span><br>
+                                <input type="range" min="1" max="5" value="3" id="question5" name="creativity_level"
+                                       oninput="updateLabel('label5', this.value)">
+                            </div>
+
+                            <!-- Question 6 -->
+                            <div class="question-block">
+                                <label for="question6">How focused are you?</label><br>
+                                <span id="label6">Neutral</span><br>
+                                <input type="range" min="1" max="5" value="3" id="question6" name="focus_level"
+                                       oninput="updateLabel('label6', this.value)">
+                            </div>
+
+                            <!-- Question 7 -->
+                            <div class="question-block">
+                                <label for="question7">Are you feeling social?</label><br>
+                                <span id="label7">Neutral</span><br>
+                                <input type="range" min="1" max="5" value="3" id="question7" name="social_level"
+                                       oninput="updateLabel('label7', this.value)">
+                            </div>
+
+                            <!-- Question 8 -->
+                            <div class="question-block">
+                                <label for="question8">How motivated are you?</label><br>
+                                <span id="label8">Neutral</span><br>
+                                <input type="range" min="1" max="5" value="3" id="question8" name="motivation_level"
+                                       oninput="updateLabel('label8', this.value)">
+                            </div>
+
+                            <!-- Question 9 -->
+                            <div class="question-block">
+                                <label for="question9">Are you feeling confident?</label><br>
+                                <span id="label9">Neutral</span><br>
+                                <input type="range" min="1" max="5" value="3" id="question9" name="confidence_level"
+                                       oninput="updateLabel('label9', this.value)">
+                            </div>
+
+                            <!-- Question 10 -->
+                            <div class="question-block">
+                                <label for="question10">How content are you?</label><br>
+                                <span id="label10">Neutral</span><br>
+                                <input type="range" min="1" max="5" value="3" id="question10" name="contentment_level"
+                                       oninput="updateLabel('label10', this.value)">
+                            </div>
+
+                            <div class="card-footer">
+                                <button type="submit" class="btn btn-pulse btn-block">Submit</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function updateLabel(labelId, value) {
+            let moodText;
+            switch (value) {
+                case '1':
+                    moodText = "Not at all";
+                    break;
+                case '2':
+                    moodText = "Not really";
+                    break;
+                case '3':
+                    moodText = "Neutral";
+                    break;
+                case '4':
+                    moodText = "Somewhat";
+                    break;
+                case '5':
+                    moodText = "Completely";
+                    break;
+                default:
+                    moodText = "Neutral";
+            }
+            document.getElementById(labelId).innerText = moodText;
+        }
+    </script>
+
+    <style>
+        .question-block {
+            margin-bottom: 20px;
+        }
+
+        .question-block label {
+            font-weight: bold;
+        }
+
+    </style>
+
+{% endblock %}

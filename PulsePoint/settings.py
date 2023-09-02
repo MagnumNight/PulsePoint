@@ -25,6 +25,12 @@ SECRET_KEY = "django-insecure-a4p+p*=k@gaaj2c^u@8u54i2==08w&lh_(ji@!b6s8i%yis05w
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'pulsepointregister@gmail.com'
+EMAIL_HOST_PASSWORD = 'llxsevfivnusvtke'
+EMAIL_PORT = 587
+
 ALLOWED_HOSTS = []
 
 
