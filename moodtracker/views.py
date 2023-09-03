@@ -75,21 +75,52 @@ def mood_graph_view(request):
     mood_data = MoodData.objects.filter(user=request.user).order_by("date")
     mood_dates = [data.date.strftime("%Y-%m-%d") for data in mood_data]
 
-    # Collecting all mood data
+    try:
+        initial_questionnaire = Questionnaire.objects.get(user=request.user)
+    except Questionnaire.DoesNotExist:
+        initial_questionnaire = None
+
+    if initial_questionnaire:
+        initial_data = {
+            "Happiness": [initial_questionnaire.happiness_level],
+            "Stress": [initial_questionnaire.stress_level],
+            "Relaxation": [initial_questionnaire.relaxation_level],
+            "Energy": [initial_questionnaire.energy_level],
+            "Creativity": [initial_questionnaire.creativity_level],
+            "Focus": [initial_questionnaire.focus_level],
+            "Social": [initial_questionnaire.social_level],
+            "Motivation": [initial_questionnaire.motivation_level],
+            "Confidence": [initial_questionnaire.confidence_level],
+            "Contentment": [initial_questionnaire.contentment_level],
+        }
+
+        mood_dates.insert(0, "Initial")
+    else:
+        initial_data = {}
+
     mood_metrics = {
-        "Happiness": [data.happiness_level for data in mood_data],
-        "Stress": [data.stress_level for data in mood_data],
-        "Relaxation": [data.relaxation_level for data in mood_data],
-        "Energy": [data.energy_level for data in mood_data],
-        "Creativity": [data.creativity_level for data in mood_data],
-        "Focus": [data.focus_level for data in mood_data],
-        "Social": [data.social_level for data in mood_data],
-        "Motivation": [data.motivation_level for data in mood_data],
-        "Confidence": [data.confidence_level for data in mood_data],
-        "Contentment": [data.contentment_level for data in mood_data],
+        "Happiness": initial_data.get("Happiness", [])
+        + [data.happiness_level for data in mood_data],
+        "Stress": initial_data.get("Stress", [])
+        + [data.stress_level for data in mood_data],
+        "Relaxation": initial_data.get("Relaxation", [])
+        + [data.relaxation_level for data in mood_data],
+        "Energy": initial_data.get("Energy", [])
+        + [data.energy_level for data in mood_data],
+        "Creativity": initial_data.get("Creativity", [])
+        + [data.creativity_level for data in mood_data],
+        "Focus": initial_data.get("Focus", [])
+        + [data.focus_level for data in mood_data],
+        "Social": initial_data.get("Social", [])
+        + [data.social_level for data in mood_data],
+        "Motivation": initial_data.get("Motivation", [])
+        + [data.motivation_level for data in mood_data],
+        "Confidence": initial_data.get("Confidence", [])
+        + [data.confidence_level for data in mood_data],
+        "Contentment": initial_data.get("Contentment", [])
+        + [data.contentment_level for data in mood_data],
     }
 
-    # Define colors for each mood
     colors = {
         "Happiness": "green",
         "Stress": "red",
@@ -103,9 +134,7 @@ def mood_graph_view(request):
         "Contentment": "brown",
     }
 
-    # Dictionary to hold individual plot divs
     plot_divs = {}
-
     for metric in mood_metrics.keys():
         metric_data = {metric: mood_metrics[metric], "Date": mood_dates}
         df_metric = pd.DataFrame(metric_data)
@@ -130,23 +159,13 @@ def mood_graph_view(request):
 
         fig.update_yaxes(
             tickvals=[1, 2, 3, 4, 5],
-            ticktext=[
-                "Not at all",
-                "Not really",
-                "Neutral",
-                "Somewhat",
-                "Completely",
-            ],
+            ticktext=["Not at all", "Not really", "Neutral", "Somewhat", "Completely"],
         )
 
-        fig.update_xaxes(
-            type="category"
-        )
+        fig.update_xaxes(type="category")
 
         plot_divs[metric] = opy.plot(fig, output_type="div", include_plotlyjs=False)
 
-    context = {
-        "plot_divs": plot_divs,
-    }
+    context = {"plot_divs": plot_divs}
 
     return render(request, "moodtracker/mood_graph.html", context)
