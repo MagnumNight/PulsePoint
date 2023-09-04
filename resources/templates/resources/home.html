@@ -3,7 +3,7 @@
 {% block title %}Resources{% endblock %}
 {% block content %}
 
-    <!-- section  -->
+    <!-- Header section  -->
     <div class="quality_area">
         <div class="container">
             <div class="row justify-content-center ">
@@ -14,33 +14,48 @@
                     </div>
                 </div>
             </div>
+            <!-- Body section  -->
             <div class="row">
                 {% for _ in "123456" %}
                     <div class="col-lg-4 col-md-6">
                         {% if forloop.counter == 1 %}
-                            <!-- Special box for the first card -->
                             <a href="https://adaa.org/understanding-anxiety/generalized-anxiety-disorder-gad"
                                class="box-link">
                                 <div class="single_quality">
                                     <div class="icon">
                                         <i class="fa-solid fa-face-sad-tear" aria-hidden="true"></i>
                                     </div>
-                                    <h3 class="card-title text-center">GAD Help</h3>
-                                    <p class="card-text">Learn more about Generalized Anxiety Disorder and find
-                                        resources to help manage it.</p>
+                                    <div style="display: flex; flex-direction: column; justify-content: space-between; align-items: center;">
+                                        <h3 class="card-title text-center">GAD Help</h3>
+                                        <p class="card-text text-center">Learn more about Generalized Anxiety Disorder
+                                            and find resources to help manage it.</p>
+                                        <div style="margin-top: 1rem;">
+                                            <iframe style="display: block; margin: auto;" width="320" height="180"
+                                                    src="https://www.youtube.com/embed/MOiaSc38ZeI"
+                                                    allowfullscreen></iframe>
+                                        </div>
+                                    </div>
                                 </div>
                             </a>
                         {% elif forloop.counter == 2 %}
-                            <!-- Special box for the second card -->
                             <a href="https://www.maketheconnection.net/conditions/ptsd/"
                                class="box-link">
                                 <div class="single_quality">
                                     <div class="icon">
                                         <i class="fa-solid fa-fighter-jet" aria-hidden="true"></i>
                                     </div>
-                                    <h3 class="card-title text-center">PTSD Help</h3>
-                                    <p class="card-text">There are many ways PTSD can impact your everyday life. Learn
-                                        how to manage PTSD.</p>
+                                    <div style="display: flex; flex-direction: column;
+                                    justify-content: space-between; align-items: center;">
+                                        <h3 class="card-title text-center">PTSD Help</h3>
+                                        <p class="card-text">There are many ways PTSD can impact your everyday life.
+                                            Learn
+                                            how to manage PTSD.</p>
+                                        <div style="margin-top: 1rem;">
+                                            <iframe style="display: block; margin: auto;" width="320" height="180"
+                                                    src="https://www.youtube.com/embed/b_n9qegR7C4?si=c_GJOqbJrsmA4ExX"
+                                                    allowfullscreen></iframe>
+                                        </div>
+                                    </div>
                                 </div>
                             </a>
                         {% else %}
@@ -61,6 +76,5 @@
             </div>
         </div>
     </div>
-    <!-- section  -->
 
 {% endblock %}
