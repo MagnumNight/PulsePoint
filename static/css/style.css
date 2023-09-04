@@ -920,12 +920,14 @@ body {
 .footer {
     background-repeat: no-repeat;
     background-position: center center;
-    background-repeat: no-repeat;
     background-size: cover;
-    background: #152538;
+    background-color: #E31937;
+    border-top: 5px solid #38B6FF;
     position: relative;
     z-index: 0;
+    height: 50px;
 }
+
 
 .footer .footer_top {
     padding-top: 130px;
@@ -1120,6 +1122,7 @@ body {
     color: #009DFF !important;
     border-color: transparent;
 }
+
 
 .bordered_1px {
     border-top: 1px solid #4e5a69;
