@@ -12,6 +12,9 @@
 
     <title>{% block title %}Pulse Point{% endblock %}</title>
 
+    <!-- Plotly -->
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="{% static 'icons/favicon.svg' %}">
     <link rel="alternate icon" href="{% static 'icons/favicon.png' %}">
@@ -19,10 +22,11 @@
     <!-- CSS here -->
     <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
     <link rel="stylesheet" href="{% static 'css/owl.carousel.min.css' %}">
-    <link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}">
+    <script src="https://kit.fontawesome.com/3f09559c30.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="{% static 'css/flaticon.css' %}">
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
 
+<<<<<<< HEAD
     <style>
         header {
             margin-bottom: 10em;
@@ -44,7 +48,11 @@
         }
         
     </style>
+=======
+>>>>>>> be1082f2255be0f042614e7d87213186b661a6b0
 </head>
+
+<body>
 
 <header>
     <div class="header-area">
@@ -99,15 +107,42 @@
 
 
 <div class="container mt-5">
+    <!-- Added this for messages, if any -->
+    {% if messages %}
+        {% for message in messages %}
+            <script type="text/javascript">
+                alert("{{ message }}");
+            </script>
+        {% endfor %}
+    {% endif %}
     {% block content %}
     {% endblock %}
 </div>
 
-<script src="{% static 'js/jquery-3.5.1.slim.min.js' %}"></script>
+<!-- Footer -->
+<footer class="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <!-- Footer content here -->
+                <p>Made with <img src="{% static 'icons/favicon.svg' %}" alt="Heart"
+                                  style="width: 16px; vertical-align: middle;"> by the PulsePoint team.</p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+<!-- jQuery -->
+<script src="{% static 'js/jquery-3.7.1.min.js' %}"></script>
 <!-- Popper.js -->
 <script src="{% static 'js/popper.min.js' %}"></script>
 <!-- Bootstrap's JavaScript -->
 <script src="{% static 'js/bootstrap.min.js' %}"></script>
 
+<<<<<<< HEAD
+=======
+</body>
+>>>>>>> be1082f2255be0f042614e7d87213186b661a6b0
 
 </html>

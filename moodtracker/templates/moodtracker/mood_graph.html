@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% block title %}Your Mood Trends{% endblock %}
+
+{% block content %}
+    <!-- Title section -->
+    <div class="quality_area">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-6">
+                    <div class="section_title mb-55 text-center">
+                        <h3>Your Mood Trends</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container mt-4">
+        <div class="row justify-content-center">
+            <!-- Loop through plot_divs to display all graphs -->
+            {% for metric, div in plot_divs.items %}
+                <div class="col-md-12 mb-4">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <!-- Insert Plotly graph here -->
+                            {{ div|safe }}
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

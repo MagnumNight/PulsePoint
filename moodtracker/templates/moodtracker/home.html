@@ -3,6 +3,48 @@
 {% block title %}Mood Tracker{% endblock %}
 
 {% block content %}
-    <h1 class="text-center">PulsePoint</h1>
-    <p class="lead text-center">Moodtracker page</p>
+    <!-- Title section -->
+    <div class="quality_area">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-6">
+                    <div class="section_title mb-55 text-center">
+                        <h3>Mood Tracker</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container mt-4">
+        <div class="row justify-content-center">
+
+            <!-- Add Mood Section -->
+            <div class="col-md-6 mb-4">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h5 class="card-title text-center">Update Your Mood</h5>
+                        <p class="card-text text-center">Let us know how you're feeling today.</p>
+                    </div>
+                    <div class="card-footer">
+                        <a href="{% url 'moodtracker:save_mood' %}" class="btn btn-pulse btn-block">Update Mood</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Mood graph -->
+            <div class="col-md-6 mb-4">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h5 class="card-title text-center">Mood Graph</h5>
+                        <p class="card-text text-center">Visualize your mood trends over time.</p>
+                    </div>
+                    <div class="card-footer">
+                        <a href="{% url 'moodtracker:mood_graph' %}" class="btn btn-pulse btn-block">View Details</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
 {% endblock %}
