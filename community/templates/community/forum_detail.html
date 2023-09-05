@@ -8,11 +8,19 @@
     <div class="container mt-5">
         <div class="row">
             <div class="col-md-12">
-                <h1>Create Forum</h1>
-                <form method="POST">
+                <h1>{{ forum.title }}</h1>
+                <p>{{ forum.description }}</p>
+
+                {% for post in posts %}
+                    <div>
+                        {{ post.content }}
+                    </div>
+                {% endfor %}
+
+                <form method="post">
                     {% csrf_token %}
                     {{ form.as_p }}
-                    <button type="submit">Create Forum</button>
+                    <button type="submit">Post</button>
                 </form>
             </div>
         </div>
