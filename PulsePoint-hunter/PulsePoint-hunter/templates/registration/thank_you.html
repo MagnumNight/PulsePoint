@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block content %}
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="text-center mt-5 custom-thankyou-message">
+                <h2>Thank You for Contacting Us!</h2>
+                <p class="mt-3">We appreciate your message. Our team will get back to you soon.</p>
+                <div class="mt-4 custom-thankyou-button">
+                    <a href="{% url 'root_home' %}" class="btn btn-primary">Back to Homepage</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}
