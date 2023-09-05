@@ -9,9 +9,12 @@ from django.shortcuts import render, redirect
 from django.template.loader import render_to_string
 from django.utils.encoding import force_bytes
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
+import requests
 
 from .forms import UserRegisterForm
 from .tokens import account_activation_token
+
+API_ENDPOINT_URL = "https://zenquotes.io/api"
 
 
 def root_homepage(request):
@@ -60,11 +63,29 @@ def activate(request, uidb64, token):
         user.is_active = True
         user.save()
         login(request, user)
+        quote = requests.get(API_ENDPOINT_URL + "/today").json()
         messages.success(
             request,
             "Thank you for your email confirmation. Now you will be redirected to the "
             "questionnaire.",
         )
+        
+        # Here will be testing zenquotes API for inspirational quotes code.
+        
+        mail_subject = "Inspirational Quote of the Day."
+        message = render_to_string(
+                "quote_of_the_day.html",
+                {
+                    "user": user,
+                    "quote": quote
+                },
+            )
+        to_email = user.email
+        email = EmailMessage(mail_subject, message, to=[to_email])
+        email.send()
+
+
+
         return redirect("moodtracker:questionnaire")  # Redirect to questionnaire view
     else:
         messages.error(request, "Activation link is invalid!")
