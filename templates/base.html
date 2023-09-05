@@ -27,6 +27,22 @@
         header {
             margin-bottom: 10em;
         }
+
+        .fa-bars {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+            width: 100%;
+            border: 1px solid black;
+            border-radius: 5px;
+            background-color: white;
+        }
+
+        .fa-bars:hover {
+            background-color: #f1f1f1;
+        }
+        
     </style>
 </head>
 
@@ -48,7 +64,7 @@
                             <div class="menu_wrap_inner d-flex align-items-center justify-content-end">
                                 <!-- Mobile Nav Toggle Button -->
                                 <div class="navbar-toggler" data-toggle="collapse" data-target="#myNavbar">
-                                    <span class="navbar-toggler-icon"></span>
+                                    <span class="navbar-toggler-icon"><i class="fa fa-bars"></i></span>
                                 </div>
                                 <!-- Nav Menu -->
                                 <div class="main-menu mobile_menu">
@@ -71,7 +87,6 @@
                                             {% endif %}
                                         </ul>
                                     </nav>
-                                      
                                 </div>
                             </div>
                         </div>
@@ -93,5 +108,6 @@
 <script src="{% static 'js/popper.min.js' %}"></script>
 <!-- Bootstrap's JavaScript -->
 <script src="{% static 'js/bootstrap.min.js' %}"></script>
+
 
 </html>
