@@ -3,20 +3,35 @@
 
 {% block content %}
 
+    <!-- Title Section -->
     <div class="quality_area">
         <div class="container mt-5">
-            <div class="row">
-                <div class="col-md-12">
-                    <h1>Create Forum</h1>
-                    <form method="POST">
-                        {% csrf_token %}
-                        {{ form.as_p }}
-                        <button type="submit">Create Forum</button>
-                    </form>
+            <div class="row justify-content-center">
+                <div class="col-md-8">
+                    <div class="section_title mb-55 text-center">
+                        <h3>Create Forum</h3>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Big Card Wrapper -->
+            <div class="row justify-content-center">
+                <div class="col-md-8">
+                    <div class="big-card">
+                        <form method="post">
+                            {% csrf_token %}
+                            <label for="{{ form.title.id_for_label }}">Title:</label><br>
+                            {{ form.title }}
+                            <br>
+                            <label for="{{ form.description.id_for_label }}">Description:</label><br>
+                            {{ form.description }}
+                            <br>
+                            <button type="submit" class="create-forum-button">Create Forum</button>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-
 
 {% endblock %}

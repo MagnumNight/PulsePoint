@@ -4,7 +4,6 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.contrib.sites.shortcuts import get_current_site
 from django.core.mail import EmailMessage
-# from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.template.loader import render_to_string
 from django.utils.encoding import force_bytes
@@ -27,7 +26,6 @@ def signup(request):
             user.is_active = False
             user.save()
             current_site = get_current_site(request)
-            # login(request, user)
 
             mail_subject = "Activate your PulsePoint account."
             message = render_to_string(
