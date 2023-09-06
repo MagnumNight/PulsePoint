@@ -926,6 +926,8 @@ body {
     position: relative;
     z-index: 0;
     height: 50px;
+    bottom: 0;
+    width: 100%;
 }
 
 
@@ -1228,6 +1230,26 @@ body {
     transform: scale(1.2);
 }
 
+
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+
+
+.flex-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.center-button-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100px;
+}
 
 
 /*# sourceMappingURL=style.css.map */

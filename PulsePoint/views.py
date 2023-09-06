@@ -10,6 +10,7 @@ from django.template.loader import render_to_string
 from django.utils.encoding import force_bytes
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 
+from django.core.mail import send_mail
 from .forms import UserRegisterForm
 from .tokens import account_activation_token
 
@@ -93,3 +94,19 @@ def account_settings(request):
     else:
         form = UserRegisterForm(instance=request.user)
     return render(request, "registration/settings.html", {"form": form})
+
+
+def send_email(request):
+    if request.method == "POST":
+        subject = "Support Message from PulsePoint"
+        message = request.POST["message"]
+        from_email = request.POST["email"]
+        recipient_list = ["pulsepointregister@gmail.com"]
+
+        send_mail(subject, message, from_email, recipient_list)
+
+        return redirect("thank_you")
+
+
+def thank_you(request):
+    return render(request, "registration/thank_you.html")
