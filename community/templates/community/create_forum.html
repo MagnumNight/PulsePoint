@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+    <div class="quality_area">
+        <div class="container mt-5">
+            <div class="row">
+                <div class="col-md-12">
+                    <h1>Create Forum</h1>
+                    <form method="POST">
+                        {% csrf_token %}
+                        {{ form.as_p }}
+                        <button type="submit">Create Forum</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}

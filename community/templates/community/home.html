@@ -3,7 +3,7 @@
 {% block title %}Community{% endblock %}
 {% block content %}
 
-    <!-- section  -->
+    <!-- Title section  -->
     <div class="quality_area">
         <div class="container">
             <div class="row justify-content-center ">
@@ -15,26 +15,16 @@
                 </div>
             </div>
             <div class="row">
-                {% for _ in "123456" %}
-                    <div class="col-lg-4 col-md-6">
-                        <!-- Wrap the box content inside an anchor tag -->
-                        <a href="#" class="box-link">
-                            <div class="single_quality">
-                                <!-- We can replace the icons here -->
-                                <div class="icon">
-                                    <i class="flaticon-customer-service"></i>
-                                </div>
-                                <h3 class="card-title text-center">Title</h3>
-                                <p class="card-text">Some content here. This can be a brief description or anything else
-                                    we
-                                    want to display in this box.</p>
-                            </div>
-                        </a>
-                    </div>
+                <a href="{% url 'community:create_forum' %}">Create a new forum</a>
+                {% for forum in forums %}
+                    <h2><a href="{% url 'forum' forum.id %}">{{ forum.title }}</a></h2>
+                    <p>{{ forum.description }}</p>
+                    <p>Created on: {{ forum.date_created }}</p>
                 {% endfor %}
             </div>
         </div>
     </div>
-    <!-- section  -->
+
+    <div style="margin-bottom: 200px;"></div>
 
 {% endblock %}

@@ -916,8 +916,14 @@ body {
     }
 }
 
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
 
 .footer {
+    flex-shrink: 0;
     background-repeat: no-repeat;
     background-position: center center;
     background-size: cover;
@@ -1228,13 +1234,6 @@ body {
 
 #emojiModal span:hover {
     transform: scale(1.2);
-}
-
-
-html, body {
-    margin: 0;
-    padding: 0;
-    height: 100%;
 }
 
 
