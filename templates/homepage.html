@@ -4,10 +4,10 @@
 
 {% block content %}
 
-    <!-- section  -->
+    <!-- The Welcome Section -->
     <div class="quality_area">
         <div class="container">
-            <div class="row justify-content-center ">
+            <div class="row justify-content-center">
                 <div class="col-lg-6">
                     <div class="section_title mb-55 text-center">
                         <h3>Welcome to PulsePoint</h3>
@@ -15,27 +15,49 @@
                     </div>
                 </div>
             </div>
-            <div class="row">
-                {% for _ in "123456" %}
-                    <div class="col-lg-4 col-md-6">
-                        <!-- Wrap the box content inside an anchor tag -->
-                        <a href="#" class="box-link">
-                            <div class="single_quality">
-                                <!-- We can replace the icons here -->
-                                <div class="icon">
-                                    <i class="fa-solid fa-desktop" aria-hidden="true"></i>
-                                </div>
-                                <h3 class="card-title text-center">Title</h3>
-                                <p class="card-text">Some content here. This can be a brief description or anything else
-                                    we
-                                    want to display in this box.</p>
-                            </div>
-                        </a>
+        </div>
+    </div>
+
+    <!-- Video Embed Section -->
+    <div class="col-lg-12 text-center" style="margin-bottom: 30px;">
+        <div class="video-wrapper">
+            <iframe style="display: block; margin: auto;" width="560" height="315"
+                    src="https://www.youtube.com/embed/BpzVvUGfJeA"
+                    allow="accelerometer; autoplay; clipboard-write;
+            encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen></iframe>
+        </div>
+    </div>
+
+    <!-- Contact Support Section -->
+    <div class="contact_area">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-6">
+                    <div class="section_title mb-55 text-center">
+                        <h3>Contact Support</h3>
+                        <p>If you have any issues or questions, please reach out to us:</p>
                     </div>
-                {% endfor %}
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <form action="{% url 'send_email' %}" method="post">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <input type="email" name="email" class="form-control" placeholder="Your Email" required>
+                        </div>
+                        <div class="form-group">
+                            <textarea name="message" class="form-control" rows="5" placeholder="Your Message"
+                                      required></textarea>
+                        </div>
+                        <div class="form-group text-center">
+                            <button type="submit" class="btn btn-pulse">Send Message</button>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
-    <!-- section  -->
 
 {% endblock %}

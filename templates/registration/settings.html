@@ -16,62 +16,65 @@
         </div>
     </div>
 
-    <div class="container mt-4">
-        <div class="row">
+    <div class="container-wrap" style="margin-top: -30px; margin-bottom: 100px;">
+        <div class="container">
+            <div class="row">
 
-            <!-- Update Information Card -->
-            <div class="col-md-6 mb-4" style="margin-top: -50px;">
-                <div class="card h-100">
-                    <div class="card-body">
-                        <h5 class="card-title text-center">Update Information</h5>
-                        <p class="card-text text-center">Modify your information to keep your account
-                            up-to-date.</p>
-                    </div>
-                    <div class="card-footer">
-                        <!-- Trigger the modal when clicked -->
-                        <a href="#" class="btn btn-pulse btn-block" data-toggle="modal"
-                           data-target="#nameUpdateModal">Update Info</a>
+                <!-- Update Information Card -->
+                <div class="col-md-6 mb-4">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h5 class="card-title text-center">Update Information</h5>
+                            <p class="card-text text-center">Modify your information to keep your account
+                                up-to-date.</p>
+                        </div>
+                        <div class="card-footer">
+                            <!-- Trigger the modal when clicked -->
+                            <a href="#" class="btn btn-pulse btn-block" data-toggle="modal"
+                               data-target="#nameUpdateModal">Update Info</a>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <!-- Delete Account Card -->
-            <div class="col-md-6 mb-4" style="margin-top: -50px;">
-                <div class="card h-100">
-                    <div class="card-body">
-                        <h5 class="card-title text-center">Delete My Account</h5>
-                        <p class="card-text text-center">Permanently delete your account and all associated data.</p>
-                    </div>
-                    <div class="card-footer">
-                        <a href="{% url 'delete_account' %}" class="btn btn-danger btn-block">Delete Account</a>
+                <!-- Delete Account Card -->
+                <div class="col-md-6 mb-4">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h5 class="card-title text-center">Delete My Account</h5>
+                            <p class="card-text text-center">Permanently delete your account and all associated
+                                data.</p>
+                        </div>
+                        <div class="card-footer">
+                            <a href="{% url 'delete_account' %}" class="btn btn-danger btn-block">Delete Account</a>
+                        </div>
                     </div>
                 </div>
-            </div>
 
+            </div>
         </div>
+    </div>
 
-        <!-- Update Information Modal Structure -->
-        <div class="modal fade" id="nameUpdateModal" tabindex="-1" aria-labelledby="nameUpdateModalLabel"
-             aria-hidden="true">
-            <div class="modal-dialog modal-lg">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="nameUpdateModalLabel">Update Information</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <form method="post" action="{% url 'account_settings' %}">
-                        {% csrf_token %}
-                        <div class="modal-body">
-                            {{ form.as_p }}
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-pulse">Update Info</button>
-                        </div>
-                    </form>
+    <!-- Update Information Modal Structure -->
+    <div class="modal fade" id="nameUpdateModal" tabindex="-1" aria-labelledby="nameUpdateModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="nameUpdateModalLabel">Update Information</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
                 </div>
+                <form method="post" action="{% url 'account_settings' %}">
+                    {% csrf_token %}
+                    <div class="modal-body">
+                        {{ form.as_p }}
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-pulse">Update Info</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
