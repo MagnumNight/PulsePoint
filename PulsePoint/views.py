@@ -70,17 +70,17 @@ def activate(request, uidb64, token):
         
         # Here will be testing zenquotes API for inspirational quotes code.
         
-        mail_subject = "Inspirational Quote of the Day."
-        message = render_to_string(
-                "quote_of_the_day.html",
-                {
-                    "user": user,
-                    "quote": quote
-                },
-            )
-        to_email = user.email
-        email = EmailMessage(mail_subject, message, to=[to_email])
-        email.send()
+        #mail_subject = "Inspirational Quote of the Day."
+        #message = render_to_string(
+        #        "quote_of_the_day.html",
+        #        {
+        #            "user": user,
+        #            "quote": quote
+        #        },
+        #    )
+        #to_email = user.email
+        #email = EmailMessage(mail_subject, message, to=[to_email])
+        #email.send()
 
 
 
