@@ -107,3 +107,11 @@ def send_email(request):
 
 def thank_you(request):
     return render(request, "registration/thank_you.html")
+
+
+def about(request):
+    return render(request, 'about.html')
+
+
+def contact(request):
+    return render(request, 'contact.html')
