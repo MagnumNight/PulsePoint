@@ -10,12 +10,13 @@
                     <div class="section_title mb-55 text-center">
                         <h3>Contact Support</h3>
                         <p>If you have any issues or questions, please reach out to us:</p>
+                        <i class="fa-solid fa-circle-user fa-5x" style="color: #38B6FF; margin-top: 60px; margin-bottom: 30px;"></i>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <div class="row justify-content-center">
+    <div class="row justify-content-center" style="margin-top: -160px;">
         <div class="col-lg-8">
             <form action="{% url 'send_email' %}" method="post">
                 {% csrf_token %}
