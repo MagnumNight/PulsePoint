@@ -1,16 +1,14 @@
 from django.contrib import messages
-from django.contrib.auth import login, logout
+from django.contrib.auth import login, logout, update_session_auth_hash
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.contrib.sites.shortcuts import get_current_site
-from django.core.mail import EmailMessage
+from django.core.mail import EmailMessage, send_mail
 from django.shortcuts import render, redirect
 from django.template.loader import render_to_string
 from django.utils.encoding import force_bytes
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
-
-from django.core.mail import send_mail
-from .forms import UserRegisterForm
+from .forms import UserRegisterForm, UserSettingsForm
 from .tokens import account_activation_token
 
 
@@ -83,13 +81,25 @@ def delete_account(request):
 @login_required
 def account_settings(request):
     if request.method == "POST":
-        form = UserRegisterForm(request.POST, instance=request.user)
+        form = UserSettingsForm(request.POST, instance=request.user)
         if form.is_valid():
-            form.save()
+            user = form.save(commit=False)
+
+            # Password change section
+            current_password = form.cleaned_data.get("current_password")
+            new_password1 = form.cleaned_data.get("new_password1")
+            if current_password and new_password1:
+                user.set_password(new_password1)
+
+            user.save()
+            update_session_auth_hash(
+                request, user
+            )  # Keep the user logged in after a password change
+
             messages.success(request, "Your information has been successfully updated.")
             return redirect("account_settings")
     else:
-        form = UserRegisterForm(instance=request.user)
+        form = UserSettingsForm(instance=request.user)
     return render(request, "registration/settings.html", {"form": form})
 
 
@@ -110,8 +120,8 @@ def thank_you(request):
 
 
 def about(request):
-    return render(request, 'about.html')
+    return render(request, "about.html")
 
 
 def contact(request):
-    return render(request, 'contact.html')
+    return render(request, "contact.html")
