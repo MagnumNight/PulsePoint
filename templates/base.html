@@ -26,27 +26,6 @@
     <link rel="stylesheet" href="{% static 'css/flaticon.css' %}">
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
 
-    <style>
-        .header-area {
-            margin-bottom: 10em;
-        }
-
-        .fa-bars {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100%;
-            width: 100%;
-            border: 1px solid black;
-            border-radius: 5px;
-            background-color: white;
-        }
-
-        .fa-bars:hover {
-            background-color: #f1f1f1;
-        }
-        
-    </style>
 
 </head>
 
@@ -76,7 +55,12 @@
                                 <div class="main-menu mobile_menu">
                                     <nav>
                                         <ul id="navigation">
-                                            <li><a href="{% url 'root_home' %}">Home</a></li>
+                                            <li><a href="{% url 'root_home' %}">Home</a>
+                                                <ul class="submenu">
+                                                    <li><a href="{% url 'about' %}">About</a></li>
+                                                    <li><a href="{% url 'contact' %}">Contact Us</a></li>
+                                                </ul>
+                                            </li>
                                             <li><a href="{% url 'community:home' %}">Community</a></li>
                                             <li><a href="{% url 'resources:home' %}">Resources</a></li>
                                             {% if user.is_authenticated %}

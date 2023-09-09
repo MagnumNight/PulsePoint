@@ -4,15 +4,12 @@
 -->
 
 {% extends "base.html" %}
-
 {% load static %}
-
 {% block content %}
-
-    <!-- section  -->
+    <!-- The Welcome Section -->
     <div class="quality_area">
         <div class="container">
-            <div class="row justify-content-center ">
+            <div class="row justify-content-center">
                 <div class="col-lg-6">
                     <div class="section_title mb-5 text-center">
                         <h3>Welcome to PulsePoint</h3>
@@ -28,7 +25,7 @@
                             <div class="single_quality">
                                 <!-- We can replace the icons here -->
                                 <div class="icon">
-                                    <i class="fa-solid fa-desktop" aria-hidden="true"></i>
+                                    <i class="fa fa-desktop" aria-hidden="true"></i>
                                 </div>
                                 <h3 class="card-title text-center">Title</h3>
                                 <p class="card-text">Some content here. This can be a brief description or anything else
@@ -37,10 +34,9 @@
                             </div>
                         </a>
                     </div>
-                {% endfor %}
+                </div>
             </div>
         </div>
     </div>
-    <!-- section  -->
 
 {% endblock %}

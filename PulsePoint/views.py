@@ -1,17 +1,15 @@
 from django.contrib import messages
-from django.contrib.auth import login, logout
+from django.contrib.auth import login, logout, update_session_auth_hash
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.contrib.sites.shortcuts import get_current_site
-from django.core.mail import EmailMessage
-from django.http import HttpResponse
+from django.core.mail import EmailMessage, send_mail
 from django.shortcuts import render, redirect
 from django.template.loader import render_to_string
 from django.utils.encoding import force_bytes
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
-
-from .forms import UserRegisterForm
-from .tokens import account_activation_token
+from .forms import UserRegisterForm, UserSettingsForm, PasswordResetForm
+from .tokens import account_activation_token, password_reset_token
 
 
 def root_homepage(request):
@@ -26,7 +24,6 @@ def signup(request):
             user.is_active = False
             user.save()
             current_site = get_current_site(request)
-            login(request, user)
 
             mail_subject = "Activate your PulsePoint account."
             message = render_to_string(
@@ -41,9 +38,8 @@ def signup(request):
             to_email = form.cleaned_data.get("email")
             email = EmailMessage(mail_subject, message, to=[to_email])
             email.send()
-            return HttpResponse(
-                "Please confirm your email address to complete the registration"
-            )
+
+            return render(request, "registration/email_confirmation.html")
     else:
         form = UserRegisterForm()
     return render(request, "registration/signup.html", {"form": form})
@@ -65,7 +61,7 @@ def activate(request, uidb64, token):
             "Thank you for your email confirmation. Now you will be redirected to the "
             "questionnaire.",
         )
-        return redirect("moodtracker:questionnaire")  # Redirect to questionnaire view
+        return redirect("moodtracker:questionnaire")
     else:
         messages.error(request, "Activation link is invalid!")
         return redirect("root_home")
@@ -85,11 +81,101 @@ def delete_account(request):
 @login_required
 def account_settings(request):
     if request.method == "POST":
-        form = UserRegisterForm(request.POST, instance=request.user)
+        form = UserSettingsForm(request.POST, instance=request.user)
         if form.is_valid():
-            form.save()
+            user = form.save(commit=False)
+
+            # Password change section
+            current_password = form.cleaned_data.get("current_password")
+            new_password1 = form.cleaned_data.get("new_password1")
+            if current_password and new_password1:
+                user.set_password(new_password1)
+
+            user.save()
+            update_session_auth_hash(
+                request, user
+            )  # Keep the user logged in after a password change
+
             messages.success(request, "Your information has been successfully updated.")
             return redirect("account_settings")
     else:
-        form = UserRegisterForm(instance=request.user)
+        form = UserSettingsForm(instance=request.user)
     return render(request, "registration/settings.html", {"form": form})
+
+
+def send_email(request):
+    if request.method == "POST":
+        subject = "Support Message from PulsePoint"
+        message = request.POST["message"]
+        from_email = request.POST["email"]
+        recipient_list = ["pulsepointregister@gmail.com"]
+
+        send_mail(subject, message, from_email, recipient_list)
+
+        return redirect("thank_you")
+
+
+def thank_you(request):
+    return render(request, "registration/thank_you.html")
+
+
+def about(request):
+    return render(request, "about.html")
+
+
+def contact(request):
+    return render(request, "contact.html")
+
+
+def password_reset_view(request):
+    if request.method == "POST":
+        email = request.POST.get("email")
+        user = User.objects.get(email=email)
+        if user:
+            current_site = get_current_site(request)
+            mail_subject = "Reset your password"
+            message = render_to_string(
+                "password_reset_email.html",
+                {
+                    "user": user,
+                    "domain": current_site.domain,
+                    "uid": urlsafe_base64_encode(force_bytes(user.pk)),
+                    "token": password_reset_token.make_token(user),
+                },
+            )
+            send_mail(mail_subject, message, "pulsepointregister@gmail.com", [email])
+            return render(request, "email_sent_confirmation.html")
+    return render(request, "password_reset_form.html")
+
+
+def password_reset_confirm(request, uidb64, token):
+    try:
+        uid = urlsafe_base64_decode(uidb64).decode()
+        user = User.objects.get(pk=uid)
+    except (TypeError, ValueError, OverflowError, User.DoesNotExist):
+        user = None
+
+    if user is not None and password_reset_token.check_token(user, token):
+        if request.method == "POST":
+            form = PasswordResetForm(request.POST, instance=user)
+            if form.is_valid():
+                user.set_password(form.cleaned_data["new_password1"])
+                user.save()
+                return redirect("password_reset_success")
+
+        else:
+            form = PasswordResetForm(instance=user)
+
+        context = {"form": form}
+        return render(request, "password_reset_confirm.html", context)
+
+    else:
+        return render(
+            request,
+            "error_page.html",
+            {"message": "Password reset link is invalid or has expired."},
+        )
+
+
+def password_reset_success(request):
+    return render(request, "password_reset_success.html")
