@@ -105,3 +105,24 @@ class UserSettingsForm(forms.ModelForm):
                 self.add_error("current_password", "Incorrect current password")
             if new_password1 != new_password2:
                 self.add_error("new_password2", "Passwords do not match")
+
+
+class PasswordResetForm(forms.ModelForm):
+    new_password1 = forms.CharField(
+        label="New password", widget=forms.PasswordInput, required=True
+    )
+    new_password2 = forms.CharField(
+        label="Confirm new password", widget=forms.PasswordInput, required=True
+    )
+
+    class Meta:
+        model = User
+        fields = ["new_password1", "new_password2"]
+
+    def clean(self):
+        cleaned_data = super().clean()
+        new_password1 = cleaned_data.get("new_password1")
+        new_password2 = cleaned_data.get("new_password2")
+
+        if new_password1 != new_password2:
+            self.add_error("new_password2", "Passwords do not match")

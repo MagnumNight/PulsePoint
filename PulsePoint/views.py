@@ -8,8 +8,8 @@ from django.shortcuts import render, redirect
 from django.template.loader import render_to_string
 from django.utils.encoding import force_bytes
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
-from .forms import UserRegisterForm, UserSettingsForm
-from .tokens import account_activation_token
+from .forms import UserRegisterForm, UserSettingsForm, PasswordResetForm
+from .tokens import account_activation_token, password_reset_token
 
 
 def root_homepage(request):
@@ -61,7 +61,7 @@ def activate(request, uidb64, token):
             "Thank you for your email confirmation. Now you will be redirected to the "
             "questionnaire.",
         )
-        return redirect("moodtracker:questionnaire")  # Redirect to questionnaire view
+        return redirect("moodtracker:questionnaire")
     else:
         messages.error(request, "Activation link is invalid!")
         return redirect("root_home")
@@ -125,3 +125,57 @@ def about(request):
 
 def contact(request):
     return render(request, "contact.html")
+
+
+def password_reset_view(request):
+    if request.method == "POST":
+        email = request.POST.get("email")
+        user = User.objects.get(email=email)
+        if user:
+            current_site = get_current_site(request)
+            mail_subject = "Reset your password"
+            message = render_to_string(
+                "password_reset_email.html",
+                {
+                    "user": user,
+                    "domain": current_site.domain,
+                    "uid": urlsafe_base64_encode(force_bytes(user.pk)),
+                    "token": password_reset_token.make_token(user),
+                },
+            )
+            send_mail(mail_subject, message, "pulsepointregister@gmail.com", [email])
+            return render(request, "email_sent_confirmation.html")
+    return render(request, "password_reset_form.html")
+
+
+def password_reset_confirm(request, uidb64, token):
+    try:
+        uid = urlsafe_base64_decode(uidb64).decode()
+        user = User.objects.get(pk=uid)
+    except (TypeError, ValueError, OverflowError, User.DoesNotExist):
+        user = None
+
+    if user is not None and password_reset_token.check_token(user, token):
+        if request.method == "POST":
+            form = PasswordResetForm(request.POST, instance=user)
+            if form.is_valid():
+                user.set_password(form.cleaned_data["new_password1"])
+                user.save()
+                return redirect("password_reset_success")
+
+        else:
+            form = PasswordResetForm(instance=user)
+
+        context = {"form": form}
+        return render(request, "password_reset_confirm.html", context)
+
+    else:
+        return render(
+            request,
+            "error_page.html",
+            {"message": "Password reset link is invalid or has expired."},
+        )
+
+
+def password_reset_success(request):
+    return render(request, "password_reset_success.html")

@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block title %}Error{% endblock %}
+
+{% block content %}
+    <!-- Header section  -->
+    <div class="quality_area">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-6">
+                    <div class="section_title mb-55 text-center">
+                        <h3>Error</h3>
+                    </div>
+                </div>
+            </div>
+            <!-- Displaying the error message -->
+            <div style="margin-top: 50px; text-align: center;">
+                <p>{{ error_message }}</p>
+                <a href="{% url 'root_home' %}" class="btn btn-pulse">Go Back to Home</a>
+            </div>
+        </div>
+    </div>
+{% endblock %}
