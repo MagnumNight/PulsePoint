@@ -29,26 +29,28 @@
 
             <!-- Forum Cards -->
             <div class="row">
-                {% for _ in "123456" %}
-                    <div class="col-lg-4 col-md-6">
-                        <!-- Wrap the box content inside an anchor tag -->
-                        <a href="#" class="box-link">
-                            <div class="single_quality">
-                                <!-- We can replace the icons here -->
-                                <div class="icon">
-                                    <i class="flaticon-customer-service"></i>
-                                </div>
-                                <h3 class="card-title text-center">Title</h3>
-                                <p class="card-text">Some content here. This can be a brief description or anything else
-                                    we
-                                    want to display in this box.</p>
+                {% for forum in forums %}
+                    <div class="col-md-12">
+                        <div class="forum-card mt-4">
+                            <div class="forum-title">
+                                <h2><a href="{% url 'community:forum_detail' forum.id %}">{{ forum.title }}</a></h2>
                             </div>
-                        </a>
+                            <div class="forum-description">
+                                <p>{{ forum.description }}</p>
+                            </div>
+                            <div class="forum-meta">
+                                <span> {{ forum.user.username }}</span>
+                                {% if forum.user %}
+                                    <span>  |  {{ forum.date_created|date:"F j, Y | P" }}</span>
+                                {% endif %}
+                            </div>
+                        </div>
                     </div>
                 {% endfor %}
             </div>
         </div>
     </div>
-    <!-- section  -->
+
+    <div style="margin-bottom: 200px;"></div>
 
 {% endblock %}
