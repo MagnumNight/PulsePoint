@@ -1305,5 +1305,10 @@ html, body {
     border: 0;
 }
 
+.quality_area .error {
+    color: red !important;
+    font-weight: bold !important;
+}
+
 
 /*# sourceMappingURL=style.css.map */

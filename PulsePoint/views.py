@@ -1,18 +1,17 @@
 from django.contrib import messages
-from django.contrib.auth import login, logout
+from django.contrib.auth import login, logout, update_session_auth_hash
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.contrib.sites.shortcuts import get_current_site
-from django.core.mail import EmailMessage
+from django.core.mail import EmailMessage, send_mail
 from django.shortcuts import render, redirect
 from django.template.loader import render_to_string
 from django.utils.encoding import force_bytes
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
-import requests
 
-from django.core.mail import send_mail
-from .forms import UserRegisterForm
-from .tokens import account_activation_token
+from .forms import UserRegisterForm, UserSettingsForm, PasswordResetForm
+from .tokens import account_activation_token, password_reset_token
+
 
 API_ENDPOINT_URL = "https://zenquotes.io/api"
 
@@ -67,24 +66,8 @@ def activate(request, uidb64, token):
             "Thank you for your email confirmation. Now you will be redirected to the "
             "questionnaire.",
         )
-        
-        # Here will be testing zenquotes API for inspirational quotes code.
-        
-        #mail_subject = "Inspirational Quote of the Day."
-        #message = render_to_string(
-        #        "quote_of_the_day.html",
-        #        {
-        #            "user": user,
-        #            "quote": quote
-        #        },
-        #    )
-        #to_email = user.email
-        #email = EmailMessage(mail_subject, message, to=[to_email])
-        #email.send()
+        return redirect("moodtracker:questionnaire")
 
-
-
-        return redirect("moodtracker:questionnaire")  # Redirect to questionnaire view
     else:
         messages.error(request, "Activation link is invalid!")
         return redirect("root_home")
@@ -104,13 +87,25 @@ def delete_account(request):
 @login_required
 def account_settings(request):
     if request.method == "POST":
-        form = UserRegisterForm(request.POST, instance=request.user)
+        form = UserSettingsForm(request.POST, instance=request.user)
         if form.is_valid():
-            form.save()
+            user = form.save(commit=False)
+
+            # Password change section
+            current_password = form.cleaned_data.get("current_password")
+            new_password1 = form.cleaned_data.get("new_password1")
+            if current_password and new_password1:
+                user.set_password(new_password1)
+
+            user.save()
+            update_session_auth_hash(
+                request, user
+            )  # Keep the user logged in after a password change
+
             messages.success(request, "Your information has been successfully updated.")
             return redirect("account_settings")
     else:
-        form = UserRegisterForm(instance=request.user)
+        form = UserSettingsForm(instance=request.user)
     return render(request, "registration/settings.html", {"form": form})
 
 
@@ -128,3 +123,65 @@ def send_email(request):
 
 def thank_you(request):
     return render(request, "registration/thank_you.html")
+
+
+def about(request):
+    return render(request, "about.html")
+
+
+def contact(request):
+    return render(request, "contact.html")
+
+
+def password_reset_view(request):
+    if request.method == "POST":
+        email = request.POST.get("email")
+        user = User.objects.get(email=email)
+        if user:
+            current_site = get_current_site(request)
+            mail_subject = "Reset your password"
+            message = render_to_string(
+                "password_reset_email.html",
+                {
+                    "user": user,
+                    "domain": current_site.domain,
+                    "uid": urlsafe_base64_encode(force_bytes(user.pk)),
+                    "token": password_reset_token.make_token(user),
+                },
+            )
+            send_mail(mail_subject, message, "pulsepointregister@gmail.com", [email])
+            return render(request, "email_sent_confirmation.html")
+    return render(request, "password_reset_form.html")
+
+
+def password_reset_confirm(request, uidb64, token):
+    try:
+        uid = urlsafe_base64_decode(uidb64).decode()
+        user = User.objects.get(pk=uid)
+    except (TypeError, ValueError, OverflowError, User.DoesNotExist):
+        user = None
+
+    if user is not None and password_reset_token.check_token(user, token):
+        if request.method == "POST":
+            form = PasswordResetForm(request.POST, instance=user)
+            if form.is_valid():
+                user.set_password(form.cleaned_data["new_password1"])
+                user.save()
+                return redirect("password_reset_success")
+
+        else:
+            form = PasswordResetForm(instance=user)
+
+        context = {"form": form}
+        return render(request, "password_reset_confirm.html", context)
+
+    else:
+        return render(
+            request,
+            "error_page.html",
+            {"message": "Password reset link is invalid or has expired."},
+        )
+
+
+def password_reset_success(request):
+    return render(request, "password_reset_success.html")

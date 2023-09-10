@@ -25,8 +25,9 @@
                                     <div class="icon">
                                         <i class="fa-solid fa-face-sad-tear" aria-hidden="true"></i>
                                     </div>
-                                    <div style="display: flex; flex-direction: column; justify-content: space-between; align-items: center;">
-                                        <h3 class="card-title text-center">GAD Help</h3>
+                                    <div style="display: flex; flex-direction: column;
+                                    justify-content: space-between; align-items: center;">
+                                        <h3 class="card-title text-center">General Anxiety Disorder</h3>
                                         <p class="card-text text-center">Learn more about Generalized Anxiety Disorder
                                             and find resources to help manage it.</p>
                                         <div style="margin-top: 1rem;">
@@ -42,14 +43,13 @@
                                class="box-link">
                                 <div class="single_quality">
                                     <div class="icon">
-                                        <i class="fa-solid fa-fighter-jet" aria-hidden="true"></i>
+                                        <i class="fa-solid fa-jet-fighter-up" aria-hidden="true"></i>
                                     </div>
                                     <div style="display: flex; flex-direction: column;
                                     justify-content: space-between; align-items: center;">
-                                        <h3 class="card-title text-center">PTSD Help</h3>
-                                        <p class="card-text">There are many ways PTSD can impact your everyday life.
-                                            Learn
-                                            how to manage PTSD.</p>
+                                        <h3 class="card-title text-center">Post Traumatic Stress Disorder</h3>
+                                        <p class="card-text text-center">There are many ways PTSD can impact your
+                                            everyday life. Learn how to manage PTSD.</p>
                                         <div style="margin-top: 1rem;">
                                             <iframe style="display: block; margin: auto;" width="320" height="180"
                                                     src="https://www.youtube.com/embed/b_n9qegR7C4?si=c_GJOqbJrsmA4ExX"
@@ -58,16 +58,84 @@
                                     </div>
                                 </div>
                             </a>
-                        {% else %}
-                            <!-- Default box for other cards -->
-                            <a href="#" class="box-link">
+                        {% elif forloop.counter == 3 %}
+                            <a href="https://www.nimh.nih.gov/health/topics/bipolar-disorder"
+                               class="box-link">
                                 <div class="single_quality">
                                     <div class="icon">
-                                        <i class="fa fa-search-plus" aria-hidden="true"></i>
+                                        <i class="fa-solid fa-face-meh" aria-hidden="true"></i>
                                     </div>
-                                    <h3 class="card-title text-center">Title</h3>
-                                    <p class="card-text">Some content here. This can be a brief description or anything
-                                        else we want to display in this box.</p>
+                                    <div style="display: flex; flex-direction: column;
+                                    justify-content: space-between; align-items: center;">
+                                        <h3 class="card-title text-center">Bipolar Disorder Type I and II</h3>
+                                        <p class="card-text text-center">Bipolar Disorder doesn't have to
+                                            control your life. <br> Learn more about it.</p>
+                                        <div style="margin-top: 1rem;">
+                                            <iframe style="display: block; margin: auto;" width="320" height="180"
+                                                    src="https://www.youtube.com/embed/G_swth2iSFI?si=LEuwciAtkHa5GBWr"
+                                                    allowfullscreen></iframe>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        {% elif forloop.counter == 4 %}
+                            <a href="https://iocdf.org/about-ocd/"
+                               class="box-link">
+                                <div class="single_quality">
+                                    <div class="icon">
+                                        <i class="fa-solid fa-arrows-spin" aria-hidden="true"></i>
+                                    </div>
+                                    <div style="display: flex; flex-direction: column;
+                                    justify-content: space-between; align-items: center;">
+                                        <h3 class="card-title text-center">Obsessive Compulsive Disorder</h3>
+                                        <p class="card-text text-center">Learn about obsessions and compulsions
+                                            and how to manage them.</p>
+                                        <div style="margin-top: 1rem;">
+                                            <iframe style="display: block; margin: auto;" width="320" height="180"
+                                                    src="https://www.youtube.com/embed/AR6k2h9PRzc?si=h5ElbpC2xEKJcv2B"
+                                                    allowfullscreen></iframe>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        {% elif forloop.counter == 5 %}
+                            <a href="https://www.psychiatry.org/patients-families/depression/what-is-depression"
+                               class="box-link">
+                                <div class="single_quality">
+                                    <div class="icon">
+                                        <i class="fa-solid fa-face-frown" aria-hidden="true"></i>
+                                    </div>
+                                    <div style="display: flex; flex-direction: column;
+                                    justify-content: space-between; align-items: center;">
+                                        <h3 class="card-title text-center">Major <br>Depressive Disorder</h3>
+                                        <p class="card-text text-center">Depression affects how you feel,
+                                            think, and act. Learn how to manage depression.</p>
+                                        <div style="margin-top: 1rem;">
+                                            <iframe style="display: block; margin: auto;" width="320" height="180"
+                                                    src="https://www.youtube.com/embed/d7NPnvKFs2Y?si=rUzDGclLFaf_m95k"
+                                                    allowfullscreen></iframe>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        {% else %}
+                            <a href="https://www.nimh.nih.gov/health/topics/attention-deficit-hyperactivity-disorder-adhd"
+                               class="box-link">
+                                <div class="single_quality">
+                                    <div class="icon">
+                                        <i class="fa-solid fa-square-person-confined" aria-hidden="true"></i>
+                                    </div>
+                                    <div style="display: flex; flex-direction: column;
+                                    justify-content: space-between; align-items: center;">
+                                        <h3 class="card-title text-center">Attention-Deficit Hyperactivity Disorder</h3>
+                                        <p class="card-text text-center">Focus and impulse control challenges
+                                            can be hard. Learn about ADHD</p>
+                                        <div style="margin-top: 1rem;">
+                                            <iframe style="display: block; margin: auto;" width="320" height="180"
+                                                    src="https://www.youtube.com/embed/5l2RIOhDXvU?si=qW3bY_rZvIQIR_lx"
+                                                    allowfullscreen></iframe>
+                                        </div>
+                                    </div>
                                 </div>
                             </a>
                         {% endif %}

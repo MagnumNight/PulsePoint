@@ -33,9 +33,18 @@ urlpatterns = [
     ),  # This line includes all auth views like login, logout, password reset, etc.
     path("delete_account/", views.delete_account, name="delete_account"),
     path("signup/", views.signup, name="signup"),
-    # path("login/", views.login, name="login"),
     path("account/settings/", views.account_settings, name="account_settings"),
     path("activate/<str:uidb64>/<str:token>/", views.activate, name="activate"),
     path("send_email/", send_email, name="send_email"),
     path("thank_you/", views.thank_you, name="thank_you"),
+    path("about/", views.about, name="about"),
+    path("contact/", views.contact, name="contact"),
+    path(
+        "password_reset_confirm/<uidb64>/<token>/",
+        views.password_reset_confirm,
+        name="password_reset_confirm",
+    ),
+    path("password_reset/", views.password_reset_view, name="password_reset"),
+    path('password_reset_success/', views.password_reset_success, name='password_reset_success'),
+
 ]

@@ -1,9 +1,7 @@
 {% extends "base.html" %}
-
 {% block title %}Sign Up{% endblock %}
-
 {% block content %}
-    <!-- section  -->
+    <!-- Header section  -->
     <div class="quality_area">
         <div class="container">
             <div class="row justify-content-center">
@@ -17,35 +15,72 @@
             <form method="post" action="{% url 'signup' %}">
                 {% csrf_token %}
 
+                <!-- First Name -->
+                {% if form.first_name.errors %}
+                    <div class="error">
+                        {{ form.first_name.errors|first }}
+                    </div>
+                {% endif %}
                 <div class="form-group">
                     <label for="id_first_name">First Name</label>
                     <input type="text" class="form-control" id="id_first_name" name="first_name"
-                           placeholder="Enter first name">
+                           placeholder="Enter first name" value="{{ form.first_name.value|default:'' }}">
                 </div>
 
+                <!-- Last Name -->
+                {% if form.last_name.errors %}
+                    <div class="error">
+                        {{ form.last_name.errors|first }}
+                    </div>
+                {% endif %}
                 <div class="form-group">
                     <label for="id_last_name">Last Name</label>
                     <input type="text" class="form-control" id="id_last_name" name="last_name"
-                           placeholder="Enter last name">
+                           placeholder="Enter last name" value="{{ form.last_name.value|default:'' }}">
                 </div>
 
+                <!-- Username -->
+                {% if form.username.errors %}
+                    <div class="error">
+                        {{ form.username.errors|first }}
+                    </div>
+                {% endif %}
                 <div class="form-group">
                     <label for="id_username">Username</label>
                     <input type="text" class="form-control" id="id_username" name="username"
-                           placeholder="Enter username">
+                           placeholder="Enter username" value="{{ form.username.value|default:'' }}">
                 </div>
 
+                <!-- Email -->
+                {% if form.email.errors %}
+                    <div class="error">
+                        {{ form.email.errors|first }}
+                    </div>
+                {% endif %}
                 <div class="form-group">
                     <label for="id_email">Email</label>
-                    <input type="email" class="form-control" id="id_email" name="email" placeholder="Enter email">
+                    <input type="email" class="form-control" id="id_email" name="email" placeholder="Enter email"
+                           value="{{ form.email.value|default:'' }}">
                 </div>
 
+                <!-- Password -->
+                {% if form.password1.errors %}
+                    <div class="error">
+                        {{ form.password1.errors|first }}
+                    </div>
+                {% endif %}
                 <div class="form-group">
                     <label for="id_password1">Password</label>
                     <input type="password" class="form-control" id="id_password1" name="password1"
                            placeholder="Enter password">
                 </div>
 
+                <!-- Password Confirm -->
+                {% if form.password2.errors %}
+                    <div class="error">
+                        {{ form.password2.errors|first }}
+                    </div>
+                {% endif %}
                 <div class="form-group">
                     <label for="id_password2">Password (Confirm)</label>
                     <input type="password" class="form-control" id="id_password2" name="password2"

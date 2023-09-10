@@ -1,8 +1,13 @@
 {% extends "base.html" %}
-
 {% block title %}Account Settings{% endblock %}
-
 {% block content %}
+
+    <style>
+        .modal-body input {
+            width: 50%;
+        }
+    </style>
+
     <div class="quality_area">
         <div class="container">
             <div class="row justify-content-center ">
@@ -29,7 +34,6 @@
                                 up-to-date.</p>
                         </div>
                         <div class="card-footer">
-                            <!-- Trigger the modal when clicked -->
                             <a href="#" class="btn btn-pulse btn-block" data-toggle="modal"
                                data-target="#nameUpdateModal">Update Info</a>
                         </div>
@@ -57,7 +61,7 @@
     <!-- Update Information Modal Structure -->
     <div class="modal fade" id="nameUpdateModal" tabindex="-1" aria-labelledby="nameUpdateModalLabel"
          aria-hidden="true">
-        <div class="modal-dialog modal-lg">
+        <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="nameUpdateModalLabel">Update Information</h5>
@@ -78,4 +82,5 @@
             </div>
         </div>
     </div>
+
 {% endblock %}
