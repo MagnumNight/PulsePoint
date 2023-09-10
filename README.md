@@ -33,9 +33,12 @@ source venv/bin/activate  # On Windows use: venv\Scripts\activate
 pip install -r requirements.txt
 ```
 
-#### Manually install six for email confirmation to function:
+#### Manually install six and requests for email confirmation and ZenQuotes to function:
 ```
 pip install django-utils-six
+
+python -m pip install requests
+
 ```
 
 ### Set Up the Database:

@@ -8,8 +8,12 @@ from django.shortcuts import render, redirect
 from django.template.loader import render_to_string
 from django.utils.encoding import force_bytes
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
+
 from .forms import UserRegisterForm, UserSettingsForm, PasswordResetForm
 from .tokens import account_activation_token, password_reset_token
+
+
+API_ENDPOINT_URL = "https://zenquotes.io/api"
 
 
 def root_homepage(request):
@@ -56,12 +60,14 @@ def activate(request, uidb64, token):
         user.is_active = True
         user.save()
         login(request, user)
+        quote = requests.get(API_ENDPOINT_URL + "/today").json()
         messages.success(
             request,
             "Thank you for your email confirmation. Now you will be redirected to the "
             "questionnaire.",
         )
         return redirect("moodtracker:questionnaire")
+
     else:
         messages.error(request, "Activation link is invalid!")
         return redirect("root_home")
