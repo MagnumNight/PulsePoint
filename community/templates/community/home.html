@@ -1,43 +1,44 @@
-<!--
-    Last modified: 09/05/2023
-    Modified by: Andrew Roney
--->
-
 {% extends "base.html" %}
 
 {% load static %}
 
+<!-- Setting the title for this page -->
 {% block title %}Community{% endblock %}
 
 {% block content %}
 
-    <!-- Title section  -->
+    <!-- Start of the Title section  -->
     <div class="quality_area">
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-lg-6">
                     <div class="section_title mb-55 text-center">
+                        <!-- Display the main title and subtitle for the community page -->
                         <h3>Community</h3>
                         <p>A place to share ideas.</p>
                     </div>
                 </div>
             </div>
 
+            <!-- Button to create a new forum -->
             <div class="row">
                 <a href="{% url 'community:create_forum' %}" class="create-forum-button">Create a new forum</a>
             </div>
 
-            <!-- Forum Cards -->
+            <!-- Start of the Forum Cards -->
             <div class="row">
                 {% for forum in forums %}
                     <div class="col-md-12">
                         <div class="forum-card mt-4">
+                            <!-- Display the forum title as a link to its detail page -->
                             <div class="forum-title">
                                 <h2><a href="{% url 'community:forum_detail' forum.id %}">{{ forum.title }}</a></h2>
                             </div>
+                            <!-- Display the forum description -->
                             <div class="forum-description">
                                 <p>{{ forum.description }}</p>
                             </div>
+                            <!-- Display the forum meta data (username and creation date) -->
                             <div class="forum-meta">
                                 <span> {{ forum.user.username }}</span>
                                 {% if forum.user %}
@@ -51,6 +52,7 @@
         </div>
     </div>
 
+    <!-- Spacer to ensure proper layout and spacing -->
     <div style="margin-bottom: 200px;"></div>
 
 {% endblock %}

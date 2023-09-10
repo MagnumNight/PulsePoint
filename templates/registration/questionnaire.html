@@ -7,7 +7,7 @@
             <div class="row justify-content-center">
                 <div class="col-lg-6">
                     <div class="section_title mb-55 text-center">
-                        <h3>Initial Mood Questionnaire</h3>
+                        <h3>Initial Mood Questionnaire</h3> <!-- Title for Questionnaire page -->
                         <p>Help us find your Pulse</p>
                     </div>
                 </div>
@@ -23,89 +23,100 @@
                     <div class="card-body">
                         <h5 class="card-title text-center">Answer these questions about your mood:</h5>
                         <form method="post">
-                            {% csrf_token %}
+                            {% csrf_token %} <!-- security -->
 
-                            <!-- Question 1 -->
+                            <!-- Question 1: Happiness Level -->
                             <div class="question-block">
                                 <label for="question1">How happy are you?</label><br>
                                 <span id="label1">Neutral</span><br>
+                                <!-- Range input from 1 to 5 -->
                                 <input type="range" min="1" max="5" value="3" id="question1" name="happiness_level"
                                        oninput="updateLabel('label1', this.value)">
                             </div>
 
-                            <!-- Question 2 -->
+                            <!-- Question 2: Stress Level -->
                             <div class="question-block">
                                 <label for="question2">How stressed are you?</label><br>
                                 <span id="label2">Neutral</span><br>
+                                <!-- Range input from 1 to 5 -->
                                 <input type="range" min="1" max="5" value="3" id="question2" name="stress_level"
                                        oninput="updateLabel('label2', this.value)">
                             </div>
 
-                            <!-- Question 3 -->
+                            <!-- Question 3: Relaxation Level -->
                             <div class="question-block">
                                 <label for="question3">How relaxed are you?</label><br>
                                 <span id="label3">Neutral</span><br>
+                                <!-- Range input from 1 to 5 -->
                                 <input type="range" min="1" max="5" value="3" id="question3" name="relaxation_level"
                                        oninput="updateLabel('label3', this.value)">
                             </div>
 
-                            <!-- Question 4 -->
+                            <!-- Question 4: Energy Level -->
                             <div class="question-block">
                                 <label for="question4">How energetic do you feel?</label><br>
                                 <span id="label4">Neutral</span><br>
+                                <!-- Range input from 1 to 5 -->
                                 <input type="range" min="1" max="5" value="3" id="question4" name="energy_level"
                                        oninput="updateLabel('label4', this.value)">
                             </div>
 
-                            <!-- Question 5 -->
+                            <!-- Question 5: Level of Creativity -->
                             <div class="question-block">
                                 <label for="question5">Are you feeling creative?</label><br>
                                 <span id="label5">Neutral</span><br>
+                                <!-- Range input from 1 to 5 -->
                                 <input type="range" min="1" max="5" value="3" id="question5" name="creativity_level"
                                        oninput="updateLabel('label5', this.value)">
                             </div>
 
-                            <!-- Question 6 -->
+                            <!-- Question 6: Focus Level -->
                             <div class="question-block">
                                 <label for="question6">How focused are you?</label><br>
                                 <span id="label6">Neutral</span><br>
+                                <!-- Range input from 1 to 5 -->
                                 <input type="range" min="1" max="5" value="3" id="question6" name="focus_level"
                                        oninput="updateLabel('label6', this.value)">
                             </div>
 
-                            <!-- Question 7 -->
+                            <!-- Question 7: Social Level -->
                             <div class="question-block">
                                 <label for="question7">Are you feeling social?</label><br>
                                 <span id="label7">Neutral</span><br>
+                                <!-- Range input from 1 to 5 -->
                                 <input type="range" min="1" max="5" value="3" id="question7" name="social_level"
                                        oninput="updateLabel('label7', this.value)">
                             </div>
 
-                            <!-- Question 8 -->
+                            <!-- Question 8: Motivation Level -->
                             <div class="question-block">
                                 <label for="question8">How motivated are you?</label><br>
                                 <span id="label8">Neutral</span><br>
+                                <!-- Range input from 1 to 5 -->
                                 <input type="range" min="1" max="5" value="3" id="question8" name="motivation_level"
                                        oninput="updateLabel('label8', this.value)">
                             </div>
 
-                            <!-- Question 9 -->
+                            <!-- Question 9: Confidence Level -->
                             <div class="question-block">
                                 <label for="question9">Are you feeling confident?</label><br>
                                 <span id="label9">Neutral</span><br>
+                                <!-- Range input from 1 to 5 -->
                                 <input type="range" min="1" max="5" value="3" id="question9" name="confidence_level"
                                        oninput="updateLabel('label9', this.value)">
                             </div>
 
-                            <!-- Question 10 -->
+                            <!-- Question 10 : Level of Content -->
                             <div class="question-block">
                                 <label for="question10">How content are you?</label><br>
                                 <span id="label10">Neutral</span><br>
+                                <!-- Range input from 1 to 5 -->
                                 <input type="range" min="1" max="5" value="3" id="question10" name="contentment_level"
                                        oninput="updateLabel('label10', this.value)">
                             </div>
 
                             <div class="card-footer">
+                                <!-- Submit button -->
                                 <button type="submit" class="btn btn-pulse btn-block">Submit</button>
                             </div>
                         </form>

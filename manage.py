@@ -4,6 +4,7 @@ import os
 import sys
 
 
+# Function: main - Run administrative tasks from the command line
 def main():
     """Run administrative tasks."""
     os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'PulsePoint.settings')

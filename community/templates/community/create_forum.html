@@ -3,7 +3,7 @@
 
 {% block content %}
 
-    <!-- Title Section -->
+    <!-- Start of the Title Section -->
     <div class="quality_area">
         <div class="container mt-5">
             <div class="row justify-content-center">
@@ -14,24 +14,28 @@
                 </div>
             </div>
 
-            <!-- Big Card Wrapper -->
+            <!-- Start of the Big Card Wrapper -->
             <div class="row justify-content-center">
                 <div class="col-md-8">
                     <div class="big-card">
+                        <!-- Start of the Form to create a forum -->
                         <form method="post">
                             {% csrf_token %}
+                            <!-- Label and input field for the forum title -->
                             <label for="{{ form.title.id_for_label }}">Title:</label><br>
                             {{ form.title }}
                             <br>
+                            <!-- Label and input field for the forum description -->
                             <label for="{{ form.description.id_for_label }}">Description:</label><br>
                             {{ form.description }}
                             <br>
+                            <!-- Submit button to create the forum -->
                             <button type="submit" class="create-forum-button">Create Forum</button>
                         </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+                    </div><!-- End of the Big Card -->
+                </div><!-- End of the Column -->
+            </div><!-- End of the Row -->
+        </div><!-- End of the Container -->
+    </div><!-- End of the Quality Area -->
 
 {% endblock %}

@@ -8,24 +8,29 @@
             <div class="row justify-content-center">
                 <div class="col-lg-6">
                     <div class="section_title mb-55 text-center">
-                        <h3>Login</h3>
+                        <h3>Login</h3> <!-- Title for the login section -->
                     </div>
                 </div>
             </div>
-            <!-- Adding a top margin to move the form down -->
-            <div style="margin-top: 50px;">
+
+            <!-- Form section for loggin in -->
+            <div style="margin-top: 50px;"> <!-- Adding a top margin to move the form down -->
+                <!-- Form for logging in -->
                 <form method="POST" action="{% url 'login' %}">
-                    {% csrf_token %}
+                    {% csrf_token %} <!-- security -->
+
+                    <!-- Handling non-field errors -->
                     {% if form.non_field_errors %}
                         <div class="error">
-                            {{ form.non_field_errors|first }}
+                            {{ form.non_field_errors|first }} <!-- Display the first non-field error -->
                         </div>
                     {% endif %}
-
+                    
+                    <!-- Username field -->
                     <div class="form-group">
                         {% if form.username.errors %}
                             <div class="error">
-                                {{ form.username.errors|first }}
+                                {{ form.username.errors|first }} <!-- Display the first username error -->
                             </div>
                         {% endif %}
                         <label for="username">Username</label>
@@ -38,6 +43,8 @@
                                 required
                         />
                     </div>
+
+                    <!-- Password field -->
                     <div class="form-group">
                         {% if form.password.errors %}
                             <div class="error">
@@ -55,6 +62,8 @@
                         />
                     </div>
                     <br/>
+                    
+                    <!-- Submit button -->
                     <button type="submit" class="btn btn-pulse">Login</button>
                     <br/><br/>
                     <a href="{% url 'password_reset' %}">Forgot password?</a>

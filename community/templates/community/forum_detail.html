@@ -3,7 +3,7 @@
 
 {% block content %}
 
-    <!-- Title Section -->
+    <!-- Start of the Title Section -->
     <div class="quality_area">
         <div class="container mt-5">
             <div class="row justify-content-center">
@@ -15,45 +15,52 @@
                 </div>
             </div>
 
-            <!-- Big Card Wrapper -->
+            <!-- Start of the Big Card Wrapper -->
             <div class="row justify-content-center">
                 <div class="col-md-8">
                     <div class="big-card">
+                        <!-- Loop through each post and display its content -->
                         {% for post in posts %}
                             <div class="forum-card">
                                 <div class="forum-description">
                                     {{ post.content }}
                                 </div>
                                 <div class="forum-meta">
+                                    <!-- Display the username if it exists -->
                                     {% if post.user %}
                                         <span>{{ post.user.username }}</span>
                                     {% endif %}
+                                    <!-- Display the date created -->
                                     <span>  |  {{ post.date_created|date:"F j, Y | P" }}</span>
                                 </div>
                             </div>
                         {% endfor %}
 
-                        <!-- Post Form -->
+                        <!-- Start of the Post Form -->
+                        <!-- Check if the user is authenticated -->
                         {% if user.is_authenticated %}
                             <h4>Add a comment:</h4>
                             <div class="post-form">
                                 <form method="post">
                                     {% csrf_token %}
+                                    <!-- Comment input area -->
                                     <label for="{{ form.content.id_for_label }}" class="visually-hidden">Content</label>
                                     <textarea name="{{ form.content.name }}" id="{{ form.content.id_for_label }}"
                                               rows="4" cols="50"
                                               class="comment-box">{{ form.content.value|default_if_none:"" }}</textarea>
                                     <br>
+                                    <!-- Submit button for the comment -->
                                     <button type="submit" class="create-forum-button">Post</button>
                                 </form>
                             </div>
                         {% else %}
+                            <!-- If the user is not authenticated, display a message -->
                             <p>You need to be logged in to post comments.</p>
                         {% endif %}
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+                    </div><!-- End of the Big Card -->
+                </div><!-- End of the Column -->
+            </div><!-- End of the Row -->
+        </div><!-- End of the Container -->
+    </div><!-- End of the Quality Area -->
 
 {% endblock %}
