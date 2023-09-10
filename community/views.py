@@ -3,20 +3,10 @@ from community.forms import ForumForm, PostForm
 from .models import Forum
 from django.contrib import messages
 
-API_ENDPOINT_URL = "https://zenquotes.io/api"
-
 def home(request):
 
     forums = Forum.objects.all().order_by("-date_created")
-    url = requests.get(API_ENDPOINT_URL + "/random").json()
-    data = url
-
-    if data:
-        quote = data[0]['q']  # Assuming the quote is stored under key 'q' in the API response
-    else:
-        quote = "Unable to fetch a quote at the moment."
-
-    return render(request, "community/home.html", {"forums": forums}, {'quote': quote})
+    return render(request, "community/home.html", {"forums": forums})
 
 
 def create_forum(request):
