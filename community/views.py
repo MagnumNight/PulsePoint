@@ -3,8 +3,8 @@ from community.forms import ForumForm, PostForm
 from .models import Forum
 from django.contrib import messages
 
-
 def home(request):
+
     forums = Forum.objects.all().order_by("-date_created")
     return render(request, "community/home.html", {"forums": forums})
 
