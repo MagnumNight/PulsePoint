@@ -41,6 +41,31 @@ python -m pip install requests
 
 ```
 
+### Secure your application:
+
+#### In your terminal, type in:
+```
+from django.core.management.utils import get_random_secret_key
+print(get_random_secret_key())
+``` 
+This will print out a new secret key that you will use in the next step.
+
+#### In the root folder, create a file named .env and fill it with YOUR info:
+```
+DJANGO_SECRET_KEY=whatever your secret key is
+EMAIL_HOST_PASSWORD=whatever your host password is
+DEBUG=True (if you want debugging on)
+```
+Debug should be off for production
+
+#### In the root folder, create a file named .gitignore and fill it out with this:
+```
+*.pyc
+__pycache__/
+db.sqlite3
+.env
+```
+
 ### Set Up the Database:
 
 #### Apply migrations to initialize your database schema:
