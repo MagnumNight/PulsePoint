@@ -45,6 +45,9 @@ urlpatterns = [
         name="password_reset_confirm",
     ),
     path("password_reset/", views.password_reset_view, name="password_reset"),
-    path('password_reset_success/', views.password_reset_success, name='password_reset_success'),
-
+    path(
+        "password_reset_success/",
+        views.password_reset_success,
+        name="password_reset_success",
+    ),
 ]
