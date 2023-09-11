@@ -1310,5 +1310,21 @@ html, body {
     font-weight: bold !important;
 }
 
+.card-header {
+    background-color: #E31937;
+    padding: 10px 10px;
+    color: white;
+}
+
+.blue-bar {
+    background-color: #38B6FF;
+    height: 5px;
+    width: 100%;
+}
+
+.card-body {
+    background-color: white;
+}
+
 
 /*# sourceMappingURL=style.css.map */

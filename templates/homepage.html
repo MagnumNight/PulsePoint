@@ -9,9 +9,6 @@
                     <div class="section_title mb-55 text-center">
                         <h3>Welcome to PulsePoint</h3>
                         <p>Your digital sanctuary for emotional well-being.</p>
-                        <p><blockquote>
-                            {{ quote }}
-                        </blockquote></p>
                     </div>
                 </div>
             </div>
@@ -36,14 +33,19 @@
                 <!-- Daily Quote Box -->
                 <div class="col-lg-5 d-flex align-items-stretch">
                     <div class="card h-100">
+                        <div class="card-header"> <!-- Added this div for the red strip -->
+                            <h3 class="card-title text-center">Daily Quote</h3>
+                        </div>
+                        <div class="blue-bar"></div> <!-- Added this div for the blue bar -->
                         <div class="card-body">
-                            <h5 class="card-title text-center">Daily Quote</h5>
-                            <p class="card-text text-center"><blockquote>
+                            <p class="card-text text-center">
+                            <blockquote>
                                 {{ quote }}
-                            </blockquote></p></p>
+                            </blockquote>
                         </div>
                     </div>
                 </div>
+
             </div>
 
             <!-- About section -->
