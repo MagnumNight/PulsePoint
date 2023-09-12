@@ -27,6 +27,7 @@
 
             <!-- Start of the Forum Cards -->
             <div class="row">
+                <!-- Loop through each forum and display its information -->
                 {% for forum in forums %}
                     <div class="col-md-12">
                         <div class="forum-card mt-4">
@@ -41,16 +42,17 @@
                             <!-- Display the forum meta data (username and creation date) -->
                             <div class="forum-meta">
                                 <span> {{ forum.user.username }}</span>
+                                <!-- Only display the creation date if the forum has a user -->
                                 {% if forum.user %}
                                     <span>  |  {{ forum.date_created|date:"F j, Y | P" }}</span>
                                 {% endif %}
-                            </div>
-                        </div>
-                    </div>
+                            </div><!-- End of the forum meta data -->
+                        </div><!-- End of the forum card -->
+                    </div><!-- End of the column -->
                 {% endfor %}
-            </div>
-        </div>
-    </div>
+            </div><!-- End of the row -->
+        </div><!-- End of the container -->
+    </div><!-- End of the quality area -->
 
     <!-- Spacer to ensure proper layout and spacing -->
     <div style="margin-bottom: 200px;"></div>
