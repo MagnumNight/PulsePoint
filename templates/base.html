@@ -41,7 +41,12 @@
                     <div class="col-xl-9 col-lg-9">
                         <div class="menu_wrap d-none d-lg-block">
                             <div class="menu_wrap_inner d-flex align-items-center justify-content-end">
-                                <div class="main-menu">
+                                {% comment %} <!-- Mobile Nav Toggle Button -->
+                                <div class="navbar-toggler" data-toggle="collapse" data-target="#myNavbar">
+                                    <span class="navbar-toggler-icon"><i class="fa fa-bars"></i></span>
+                                </div> {% endcomment %}
+                                <!-- Nav Menu -->
+                                <div class="main-menu mobile_menu">
                                     <nav>
                                         <ul id="navigation">
                                             <li><a href="{% url 'root_home' %}">Home</a>

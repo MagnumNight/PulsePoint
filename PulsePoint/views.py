@@ -15,6 +15,7 @@ import requests
 API_ENDPOINT_URL = "https://zenquotes.io/api"
 
 
+# Function: root_homepage - Renders homepage
 def root_homepage(request):
     url = requests.get(API_ENDPOINT_URL + "/today").json()
     data = url
@@ -26,7 +27,9 @@ def root_homepage(request):
     return render(request, "homepage.html", {'quote': quote})
 
 
+# Function: signup - Renders signup page
 def signup(request):
+    # If user submits signup form, save user and send activation email
     if request.method == "POST":
         form = UserRegisterForm(request.POST)
         if form.is_valid():
@@ -50,18 +53,22 @@ def signup(request):
             email.send()
 
             return render(request, "registration/email_confirmation.html")
+    # If user does not submit signup form, go back to signup page
     else:
         form = UserRegisterForm()
     return render(request, "registration/signup.html", {"form": form})
 
 
+# Function: activate - Activates user account
 def activate(request, uidb64, token):
+    # Check if user is already logged in
     try:
         uid = urlsafe_base64_decode(uidb64).decode()
         user = User.objects.get(pk=uid)
     except (TypeError, ValueError, OverflowError, User.DoesNotExist):
         user = None
 
+    # If user is logged in snd token matches, activate user account
     if user is not None and account_activation_token.check_token(user, token):
         user.is_active = True
         user.save()
@@ -73,13 +80,14 @@ def activate(request, uidb64, token):
             "questionnaire.",
         )
         return redirect("moodtracker:questionnaire")
-
+    # If user is logged in, redirect to home page
     else:
         messages.error(request, "Activation link is invalid!")
         return redirect("root_home")
 
 
 @login_required
+# Function: delete_account - Renders delete account page
 def delete_account(request):
     if request.method == "POST":
         user = request.user
@@ -91,7 +99,9 @@ def delete_account(request):
 
 
 @login_required
+# Function: account_settings - Change password
 def account_settings(request):
+    # If user submits account settings form, save user information
     if request.method == "POST":
         form = UserSettingsForm(request.POST, instance=request.user)
         if form.is_valid():
@@ -110,11 +120,13 @@ def account_settings(request):
 
             messages.success(request, "Your information has been successfully updated.")
             return redirect("account_settings")
+    # If user does not submit account settings form, go back
     else:
         form = UserSettingsForm(instance=request.user)
     return render(request, "registration/settings.html", {"form": form})
 
 
+# Function: send_email - Sends registration email
 def send_email(request):
     if request.method == "POST":
         subject = "Support Message from PulsePoint"
@@ -127,19 +139,24 @@ def send_email(request):
         return redirect("thank_you")
 
 
+# Function: thank_you - Renders thank you page
 def thank_you(request):
     return render(request, "registration/thank_you.html")
 
 
+# Function: about - Renders about page
 def about(request):
     return render(request, "about.html")
 
 
+# Function: contact - Renders contact page
 def contact(request):
     return render(request, "contact.html")
 
 
+# Function: password_reset_view - Renders password reset page
 def password_reset_view(request):
+    # If user submits password reset form, send password reset email
     if request.method == "POST":
         email = request.POST.get("email")
         user = User.objects.get(email=email)
@@ -160,13 +177,16 @@ def password_reset_view(request):
     return render(request, "password_reset_form.html")
 
 
+# Function: password_reset_confirm - Renders password reset confirmation page
 def password_reset_confirm(request, uidb64, token):
+    # Check if user is already logged in
     try:
         uid = urlsafe_base64_decode(uidb64).decode()
         user = User.objects.get(pk=uid)
     except (TypeError, ValueError, OverflowError, User.DoesNotExist):
         user = None
 
+    # If user is logged in and token matches, reset password
     if user is not None and password_reset_token.check_token(user, token):
         if request.method == "POST":
             form = PasswordResetForm(request.POST, instance=user)
@@ -189,5 +209,6 @@ def password_reset_confirm(request, uidb64, token):
         )
 
 
+# Function: password_reset_success - Renders password reset success page
 def password_reset_success(request):
     return render(request, "password_reset_success.html")

@@ -1,7 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 
-
+# Class: Questionnaire - Django model for questionnaire
 class Questionnaire(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
 
@@ -16,7 +16,7 @@ class Questionnaire(models.Model):
     confidence_level = models.IntegerField(default=3)
     contentment_level = models.IntegerField(default=3)
 
-
+# Class: MoodData - Django model for mood data
 class MoodData(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     date = models.DateField(auto_now_add=True)

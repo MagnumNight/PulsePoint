@@ -1,25 +1,28 @@
 {% extends "base.html" %}
 {% block title %}Delete Account{% endblock %}
 {% block content %}
-    <!-- section  -->
+    <!-- Warning section for account deletion -->
     <div class="quality_area">
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-lg-6">
                     <div class="section_title mb-55 text-center">
                         <h4>Are you sure you want</h4>
-                        <h4>to delete your account?</h4>
-                        <p>This action is irreversible.</p>
+                        <h4>to delete your account?</h4> <!-- Warning message header -->
+                        <p>This action is irreversible.</p> <!-- Warning message details -->
                         <p>All your data will be permanently deleted.</p>
                         <i class="fa-solid fa-trash fa-5x"
                            style="color: #38B6FF; margin-top: 60px; margin-bottom: 10px;"></i>
                     </div>
                 </div>
             </div>
+
+            <!-- Form section for account deletion -->
             <div class="row justify-content-center">
                 <div class="col-lg-6">
+                    <!-- Form to handle account deletion-->
                     <form method="post" class="d-flex justify-content-center">
-                        {% csrf_token %}
+                        {% csrf_token %} <!-- security -->
                         <button type="submit" class="btn btn-danger">Delete My Account</button>
                         <a href="{% url 'root_home' %}" class="btn btn-secondary ml-2">Cancel</a>
                     </form>

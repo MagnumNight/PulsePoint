@@ -8,20 +8,24 @@ import plotly.express as px
 import plotly.offline as opy
 import pandas as pd
 
-
+# Function: home - Renders home page
 @login_required
 def home(request):
     return render(request, "moodtracker/home.html")
 
-
+# Function: questionnaire_view - Renders questionnaire page
 @login_required
 def questionnaire_view(request):
+    # Check if user has already filled out questionnaire
     try:
         questionnaire = Questionnaire.objects.get(user=request.user)
+        # If user has already filled out questionnaire, redirect to home page
         if questionnaire:
             messages.info(request, "You have already filled out the questionnaire.")
             return redirect("moodtracker:home")
+    # If user has not filled out questionnaire, render questionnaire page
     except Questionnaire.DoesNotExist:
+        # If user submits questionnaire, save questionnaire and redirect to home page
         if request.method == "POST":
             form = QuestionnaireForm(request.POST)
             if form.is_valid():
@@ -32,16 +36,20 @@ def questionnaire_view(request):
                     request, "Your questionnaire has been submitted successfully!"
                 )
                 return redirect("moodtracker:home")
+        # If user does not submit questionnaire, render questionnaire page
         else:
             form = QuestionnaireForm()
 
         return render(request, "moodtracker/questionnaire.html", {"form": form})
 
 
+# Function: save_mood - Renders save mood page
 @login_required
 def save_mood(request):
+    # Check if user has already filled out questionnaire
     if request.method == "POST":
         form = MoodDataForm(request.POST)
+        # If user submits mood data, save mood data and redirect to home page
         if form.is_valid():
             mood_data, created = MoodData.objects.update_or_create(
                 user=request.user,
@@ -59,27 +67,32 @@ def save_mood(request):
                     "contentment_level": form.cleaned_data["contentment_level"],
                 },
             )
+            # If mood data is created, display success message
             if created:
                 messages.success(request, "Your mood has been recorded!")
+            # If mood data is updated, display info message
             else:
                 messages.info(request, "Your mood for today has been updated!")
             return redirect("moodtracker:home")
+    # If user does not submit mood data, render save mood page
     else:
         form = MoodDataForm()
 
     return render(request, "moodtracker/save_mood.html", {"form": form})
 
-
+# Function: mood_graph_view - Renders mood graph page
 @login_required
 def mood_graph_view(request):
     mood_data = MoodData.objects.filter(user=request.user).order_by("date")
     mood_dates = [data.date.strftime("%Y-%m-%d") for data in mood_data]
 
+    # Check if user has filled out questionnaire
     try:
         initial_questionnaire = Questionnaire.objects.get(user=request.user)
     except Questionnaire.DoesNotExist:
         initial_questionnaire = None
 
+    # If user has filled out questionnaire, add initial data to mood metrics
     if initial_questionnaire:
         initial_data = {
             "Happiness": [initial_questionnaire.happiness_level],
@@ -95,6 +108,8 @@ def mood_graph_view(request):
         }
 
         mood_dates.insert(0, "Initial")
+
+    # If user has not filled out questionnaire, set initial data to empty
     else:
         initial_data = {}
 
@@ -135,6 +150,7 @@ def mood_graph_view(request):
     }
 
     plot_divs = {}
+    # Create plot for each metric
     for metric in mood_metrics.keys():
         metric_data = {metric: mood_metrics[metric], "Date": mood_dates}
         df_metric = pd.DataFrame(metric_data)

@@ -21,6 +21,7 @@
         </div>
     </div>
 
+    <!-- Main content wrapper for account settings -->
     <div class="container-wrap" style="margin-top: -30px; margin-bottom: 100px;">
         <div class="container">
             <div class="row">
@@ -46,7 +47,7 @@
                         <div class="card-body">
                             <h5 class="card-title text-center">Delete My Account</h5>
                             <p class="card-text text-center">Permanently delete your account and all associated
-                                data.</p>
+                                data.</p> <!-- Warning message for account deletion -->
                         </div>
                         <div class="card-footer">
                             <a href="{% url 'delete_account' %}" class="btn btn-danger btn-block">Delete Account</a>
@@ -65,18 +66,20 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="nameUpdateModalLabel">Update Information</h5>
+                    <!-- Close button for modal -->
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
+                <!-- Form to handle information update -->
                 <form method="post" action="{% url 'account_settings' %}">
-                    {% csrf_token %}
+                    {% csrf_token %} <!-- security -->
                     <div class="modal-body">
-                        {{ form.as_p }}
+                        {{ form.as_p }} <!-- Django form rendered as paragraphs-->
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-pulse">Update Info</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> <!-- Close button for modal -->
+                        <button type="submit" class="btn btn-pulse">Update Info</button> <!-- Submit button for form -->
                     </div>
                 </form>
             </div>
