@@ -60,34 +60,9 @@ db.sqlite3
 
 ### Set Up the Database:
 
-#### Apply migrations to initialize your database schema:
+#### Make & Apply migrations to initialize your database schema:
 ```
-python manage.py migrate
-```
-### Run the Development Server:
-```
-python manage.py runserver
-```
-You can now navigate to http://127.0.0.1:8000/ in your browser to see the PulsePoint application.
-
-### Features
-#### Mood Tracker: 
-Allows users to record their moods over time and view trends.
-
-#### Community: 
-Connect, share, and discuss with a community of users.
-
-#### Resources:
-Allows users to get the help they need.
-
-### License:
-This project is licensed under the Apache License - please look at the LICENSE.txt file for details.
-
-
-### Set Up the Database:
-
-#### Apply migrations to initialize your database schema:
-```
+python manage.py makemigrations
 python manage.py migrate
 ```
 ### Run the Development Server:
