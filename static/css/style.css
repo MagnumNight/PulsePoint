@@ -1325,6 +1325,10 @@ html, body {
 
 .card-body {
     background-color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
 }
 
 .custom-top-margin {
