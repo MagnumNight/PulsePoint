@@ -68,12 +68,12 @@ def activate(request, uidb64, token):
     except (TypeError, ValueError, OverflowError, User.DoesNotExist):
         user = None
 
-    # If user is logged in snd token matches, activate user account
+    # If user is logged in and token matches, activate user account
     if user is not None and account_activation_token.check_token(user, token):
         user.is_active = True
         user.save()
         login(request, user)
-        quote = requests.get(API_ENDPOINT_URL + "/today").json()
+        # quote = requests.get(API_ENDPOINT_URL + "/today").json()
         messages.success(
             request,
             "Thank you for your email confirmation. Now you will be redirected to the "

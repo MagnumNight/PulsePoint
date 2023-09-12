@@ -2,6 +2,7 @@ from django import forms
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 
+
 # Class: UserRegisterForm - Django form for user registration
 class UserRegisterForm(UserCreationForm):
     email = forms.EmailField()
@@ -41,6 +42,7 @@ class UserRegisterForm(UserCreationForm):
         if commit:
             user.save()
         return user
+
 
 # Class: UserSettingsForm - Django form for user settings
 class UserSettingsForm(forms.ModelForm):
@@ -113,6 +115,7 @@ class UserSettingsForm(forms.ModelForm):
                 self.add_error("current_password", "Incorrect current password")
             if new_password1 != new_password2:
                 self.add_error("new_password2", "Passwords do not match")
+
 
 # Class: PasswordResetRequestForm - Django form for password reset request
 class PasswordResetForm(forms.ModelForm):

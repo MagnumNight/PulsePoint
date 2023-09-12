@@ -12,6 +12,7 @@ class Forum(models.Model):
     def __str__(self):
         return self.title
 
+
 class Post(models.Model):
     title = models.CharField(max_length=100)
     content = models.TextField()

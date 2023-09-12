@@ -14,6 +14,7 @@ class TokenGenerator(PasswordResetTokenGenerator):
 
 account_activation_token = TokenGenerator()
 
+
 # Class: PasswordResetTokenGenerator - Django token generator for password reset
 class PasswordResetTokenGenerator(PasswordResetTokenGenerator):
     def _make_hash_value(self, user, timestamp):

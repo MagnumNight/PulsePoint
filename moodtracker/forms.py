@@ -1,6 +1,7 @@
 from django import forms
 from .models import Questionnaire, MoodData
 
+
 # Class: QuestionnaireForm - Django form for questionnaire model
 class QuestionnaireForm(forms.ModelForm):
     class Meta:
@@ -17,6 +18,7 @@ class QuestionnaireForm(forms.ModelForm):
             "confidence_level",
             "contentment_level",
         ]
+
 
 # Class: MoodDataForm - Django form for mood data model
 class MoodDataForm(forms.ModelForm):

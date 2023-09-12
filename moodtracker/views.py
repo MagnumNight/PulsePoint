@@ -8,10 +8,12 @@ import plotly.express as px
 import plotly.offline as opy
 import pandas as pd
 
+
 # Function: home - Renders home page
 @login_required
 def home(request):
     return render(request, "moodtracker/home.html")
+
 
 # Function: questionnaire_view - Renders questionnaire page
 @login_required
@@ -79,6 +81,7 @@ def save_mood(request):
         form = MoodDataForm()
 
     return render(request, "moodtracker/save_mood.html", {"form": form})
+
 
 # Function: mood_graph_view - Renders mood graph page
 @login_required
