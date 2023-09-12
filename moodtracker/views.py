@@ -140,16 +140,16 @@ def mood_graph_view(request):
     }
 
     colors = {
-        "Happiness": "green",
-        "Stress": "red",
-        "Relaxation": "blue",
-        "Energy": "yellow",
-        "Creativity": "purple",
-        "Focus": "cyan",
-        "Social": "orange",
-        "Motivation": "pink",
-        "Confidence": "gold",
-        "Contentment": "brown",
+        "Happiness": "#4CAF50",  # Vibrant green
+        "Stress": "#FF5252",  # Muted red
+        "Relaxation": "#2196F3",  # Soothing blue
+        "Energy": "#FFEB3B",  # Bright yellow
+        "Creativity": "#9C27B0",  # Rich purple
+        "Focus": "#00BCD4",  # Clean cyan
+        "Social": "#FF9800",  # Defined orange
+        "Motivation": "#E91E63",  # Lively pink
+        "Confidence": "#FFC107",  # Nice amber
+        "Contentment": "#009688",  # Teal (lol)
     }
 
     plot_divs = {}
