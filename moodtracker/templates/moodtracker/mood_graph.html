@@ -10,13 +10,15 @@
                 <div class="col-lg-6">
                     <div class="section_title mb-55 text-center">
                         <h3>Your Mood Trends</h3>
+                        <i class="fa-solid fa-chart-simple fa-5x"
+                           style="color: #38B6FF; margin-top: 60px;"></i>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <div class="container mt-4">
+    <div class="container custom-top-margin">
         <div class="row justify-content-center">
             <!-- Loop through plot_divs to display all graphs -->
             {% for metric, div in plot_divs.items %}
