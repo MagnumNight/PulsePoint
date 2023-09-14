@@ -45,7 +45,8 @@ urlpatterns = [
         views.password_reset_confirm,
         name="password_reset_confirm",
     ),  # Password reset confirm
-    path("password_reset/", views.password_reset_view, name="password_reset"),
-    path('password_reset_success/', views.password_reset_success, name='password_reset_success'),
+    path("password_reset/", views.password_reset_view, name="password_reset"), # Password reset
+    path('password_reset_success/', views.password_reset_success, name='password_reset_success'), # Password reset success
+    path('search/', views.search_results, name='search_results'), # Search results
 
 ]

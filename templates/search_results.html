@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% load search_filters %}
+{% block content %}
+
+<div class="quality_area">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-6">
+                <div class="section_title mb-55 text-center">
+                    <h2>Search Results</h2>
+                </div>
+            </div>
+        </div>
+        <!-- Adding a top margin to move the content down -->
+        <div style="margin-top: 50px;">
+            <!-- Display search form -->
+                {% if results %}
+                <ul>
+                <!-- Loop through results and display them -->
+                {% for result in results %}
+                    <li>
+                        {% if result|class_name == "Post" %}
+                            <a href="{% url 'post_detail' result.id %}">{{ result.title }}</a>
+                        {% elif result|class_name == "Comment" %}
+                            {{ result.text }}
+                        {% endif %}
+                        <!-- Handle other models similarly -->
+                    </li>
+                {% endfor %}
+                </ul>
+            {% else %}
+                <p>No results found for "{{ query }}".</p>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

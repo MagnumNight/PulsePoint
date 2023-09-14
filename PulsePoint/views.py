@@ -3,15 +3,24 @@ from django.contrib.auth import login, logout, update_session_auth_hash
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.contrib.sites.shortcuts import get_current_site
+
+from django.db.models import Q
+
 from django.core.mail import EmailMessage, send_mail
 from django.shortcuts import render, redirect
 from django.template.loader import render_to_string
+
 from django.utils.encoding import force_bytes
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from .forms import UserRegisterForm, UserSettingsForm, PasswordResetForm
 from .tokens import account_activation_token, password_reset_token
+
+from itertools import chain
+from community.models import Forum, Post
+
 import requests
 
+# Variable: API_ENDPOINT_URL - The URL for the API endpoint that returns a quote of the day
 API_ENDPOINT_URL = "https://zenquotes.io/api"
 
 
@@ -59,6 +68,7 @@ def signup(request):
     return render(request, "registration/signup.html", {"form": form})
 
 
+
 # Function: activate - Activates user account
 def activate(request, uidb64, token):
     # Check if user is already logged in
@@ -86,6 +96,7 @@ def activate(request, uidb64, token):
         return redirect("root_home")
 
 
+
 @login_required
 # Function: delete_account - Renders delete account page
 def delete_account(request):
@@ -96,6 +107,7 @@ def delete_account(request):
         messages.success(request, "Your account has been successfully deleted.")
         return redirect("root_home")
     return render(request, "registration/delete_account.html")
+
 
 
 @login_required
@@ -126,6 +138,7 @@ def account_settings(request):
     return render(request, "registration/settings.html", {"form": form})
 
 
+
 # Function: send_email - Sends registration email
 def send_email(request):
     if request.method == "POST":
@@ -139,9 +152,11 @@ def send_email(request):
         return redirect("thank_you")
 
 
+
 # Function: thank_you - Renders thank you page
 def thank_you(request):
     return render(request, "registration/thank_you.html")
+
 
 
 # Function: about - Renders about page
@@ -149,9 +164,11 @@ def about(request):
     return render(request, "about.html")
 
 
+
 # Function: contact - Renders contact page
 def contact(request):
     return render(request, "contact.html")
+
 
 
 # Function: password_reset_view - Renders password reset page
@@ -175,6 +192,7 @@ def password_reset_view(request):
             send_mail(mail_subject, message, "pulsepointregister@gmail.com", [email])
             return render(request, "email_sent_confirmation.html")
     return render(request, "password_reset_form.html")
+
 
 
 # Function: password_reset_confirm - Renders password reset confirmation page
@@ -209,6 +227,26 @@ def password_reset_confirm(request, uidb64, token):
         )
 
 
+
 # Function: password_reset_success - Renders password reset success page
 def password_reset_success(request):
     return render(request, "password_reset_success.html")
+
+
+
+# Function: search_results - Renders search results page
+def search_results(request):
+    query = request.GET.get('q')#gets the query from the search bar
+    #if query is not empty then search for the query in the database
+    if query:
+        post_results = Post.objects.filter(Q(title__icontains=query) | Q(content__icontains=query)) #Q is a complex lookup function that allows us to use OR statements
+        forum_results = Forum.objects.filter(Q(title__icontains=query) | Q(description__icontains=query))
+        #more results
+        results = list(chain(post_results, forum_results)) #chain allows us to combine two querysets
+    else:
+        results = []
+    
+    return render(request, 'search_results.html', {'results': results, 'query': query})
+        
+
+        

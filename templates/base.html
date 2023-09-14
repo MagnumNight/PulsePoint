@@ -26,6 +26,14 @@
     <link rel="stylesheet" href="{% static 'css/flaticon.css' %}">
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
 
+    <style>
+        #searchBar {
+            position: absolute;
+            top: 1em;
+            right: 0;
+        }
+    </style>
+
 </head>
 
 <body>
@@ -42,6 +50,18 @@
                                      style="height: 180px;">
                             </a>
                         </div>
+                    </div>
+
+                    <!-- Search Bar -->
+                    <div class="col-xl-4 col-lg-4" id="searchBar">
+                        <form action="{% url 'search_results' %}" method="get">
+                            <div class="input-group">
+                                <input type="text" class="form-control" name="q" placeholder="Search...">
+                                <div class="input-group-append">
+                                    <button class="btn btn-primary" type="submit"><i class="fas fa-search"></i></button>
+                                </div>
+                            </div>
+                        </form>
                     </div>
 
                     <!-- Menu -->
