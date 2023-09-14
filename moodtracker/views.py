@@ -56,6 +56,7 @@ def save_mood(request):
             mood_data, created = MoodData.objects.update_or_create(
                 user=request.user,
                 date=datetime.date.today(),
+                # Update mood data with form data
                 defaults={
                     "happiness_level": form.cleaned_data["happiness_level"],
                     "stress_level": form.cleaned_data["stress_level"],
@@ -116,6 +117,7 @@ def mood_graph_view(request):
     else:
         initial_data = {}
 
+    # Create dictionary of mood metrics and their values
     mood_metrics = {
         "Happiness": initial_data.get("Happiness", [])
         + [data.happiness_level for data in mood_data],
@@ -139,6 +141,7 @@ def mood_graph_view(request):
         + [data.contentment_level for data in mood_data],
     }
 
+    # Dictionary of colors for each metric in the graph
     colors = {
         "Happiness": "#4CAF50",  # Vibrant green
         "Stress": "#FF5252",  # Muted red
@@ -152,12 +155,14 @@ def mood_graph_view(request):
         "Contentment": "#009688",  # Teal (lol)
     }
 
+    # Dictionary of plot divs for each metric
     plot_divs = {}
     # Create plot for each metric
     for metric in mood_metrics.keys():
         metric_data = {metric: mood_metrics[metric], "Date": mood_dates}
         df_metric = pd.DataFrame(metric_data)
 
+        # Create plot
         fig = px.bar(
             df_metric,
             x="Date",
@@ -166,6 +171,7 @@ def mood_graph_view(request):
             color_discrete_sequence=[colors.get(metric, "grey")],
         )
 
+        # Update plot
         fig.update_layout(
             title={
                 "text": f"Your {metric} Levels Over Time",
@@ -176,15 +182,19 @@ def mood_graph_view(request):
             }
         )
 
+        # Update Y axes
         fig.update_yaxes(
             tickvals=[1, 2, 3, 4, 5],
             ticktext=["Not at all", "Not really", "Neutral", "Somewhat", "Completely"],
         )
 
+        # Update X axes
         fig.update_xaxes(type="category")
 
+        # Add plot div to dictionary
         plot_divs[metric] = opy.plot(fig, output_type="div", include_plotlyjs=False)
 
+    # Render mood graph page with plot divs
     context = {"plot_divs": plot_divs}
 
     return render(request, "moodtracker/mood_graph.html", context)

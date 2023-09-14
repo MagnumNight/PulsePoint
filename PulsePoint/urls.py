@@ -20,35 +20,32 @@ from django.urls import path, include
 from . import views
 from .views import send_email
 
+# Variable: urlpatterns - The URL patterns for the project as a whole
 urlpatterns = [
-    path("admin/", admin.site.urls),
+    path("admin/", admin.site.urls), # Admin site
     path(
         "", views.root_homepage, name="root_home"
     ),  # Root homepage for the entire project
-    path("moodtracker/", include("moodtracker.urls", namespace="moodtracker")),
-    path("community/", include("community.urls", namespace="community")),
-    path("resources/", include("resources.urls", namespace="resources")),
+    path("moodtracker/", include("moodtracker.urls", namespace="moodtracker")),  # Moodtracker app
+    path("community/", include("community.urls", namespace="community")),  # Community app
+    path("resources/", include("resources.urls", namespace="resources")),  # Resources app
     path(
         "accounts/", include("django.contrib.auth.urls")
     ),  # This line includes all auth views like login, logout, password reset, etc.
-    path("delete_account/", views.delete_account, name="delete_account"),
-    path("signup/", views.signup, name="signup"),
-    # path("login/", views.login, name="login"),
-    path("account/settings/", views.account_settings, name="account_settings"),
-    path("activate/<str:uidb64>/<str:token>/", views.activate, name="activate"),
-    path("send_email/", send_email, name="send_email"),
-    path("thank_you/", views.thank_you, name="thank_you"),
-    path("about/", views.about, name="about"),
-    path("contact/", views.contact, name="contact"),
+    path("delete_account/", views.delete_account, name="delete_account"),  # Delete account
+    path("signup/", views.signup, name="signup"),  # Sign up
+    path("account/settings/", views.account_settings, name="account_settings"),  # Account settings
+    path("activate/<str:uidb64>/<str:token>/", views.activate, name="activate"),  # Activate account
+    path("send_email/", send_email, name="send_email"),  # Send email
+    path("thank_you/", views.thank_you, name="thank_you"),  # Thank you
+    path("about/", views.about, name="about"),  # About
+    path("contact/", views.contact, name="contact"),  # Contact
     path(
         "password_reset_confirm/<uidb64>/<token>/",
         views.password_reset_confirm,
         name="password_reset_confirm",
-    ),
+    ),  # Password reset confirm
     path("password_reset/", views.password_reset_view, name="password_reset"),
-    path(
-        "password_reset_success/",
-        views.password_reset_success,
-        name="password_reset_success",
-    ),
+    path('password_reset_success/', views.password_reset_success, name='password_reset_success'),
+
 ]

@@ -18,7 +18,7 @@
             <div class="row justify-content-center">
                 <div class="col-md-8">
                     <div class="big-card">
-                    <h3>Comments</h3>
+                        <h3>Comments</h3>
                         {% for post in posts %}
                             <div class="forum-card">
                                 <div class="forum-description">
@@ -30,7 +30,7 @@
                                         <span>{{ post.user.username }}</span>
                                     {% endif %}
                                     <!-- Display the date created -->
-                                    <span>  |  {{ post.date_created|date:"F j, Y | P" }}</span>
+                                    <span>  | {{ post.date_created|date:"F j, Y | P" }}</span>
                                 </div>
                             </div>
                         {% endfor %}
