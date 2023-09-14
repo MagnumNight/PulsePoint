@@ -550,6 +550,7 @@ body {
     background: #fff !important;
 }
 
+
 .header-area {
     position: absolute;
     left: 0;
@@ -573,7 +574,7 @@ body {
 
 .header-area .main-header-area {
     background: #E31937;
-);
+
 }
 
 
@@ -1308,6 +1309,30 @@ html, body {
 .quality_area .error {
     color: red !important;
     font-weight: bold !important;
+}
+
+.card-header {
+    background-color: #E31937;
+    padding: 10px 10px;
+    color: white;
+}
+
+.blue-bar {
+    background-color: #38B6FF;
+    height: 5px;
+    width: 100%;
+}
+
+.card-body {
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.custom-top-margin {
+    margin-top: -100px;
 }
 
 

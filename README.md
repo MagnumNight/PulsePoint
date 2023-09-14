@@ -33,44 +33,36 @@ source venv/bin/activate  # On Windows use: venv\Scripts\activate
 pip install -r requirements.txt
 ```
 
-#### Manually install six and requests for email confirmation and ZenQuotes to function:
+### Secure your application:
+
+#### In your terminal, type in:
 ```
-pip install django-utils-six
+from django.core.management.utils import get_random_secret_key
+print(get_random_secret_key())
+``` 
+This will print out a new secret key that you will use in the next step.
 
-python -m pip install requests
+#### In the root folder, create a file named .env and fill it with YOUR info:
+```
+DJANGO_SECRET_KEY=whatever your secret key is
+EMAIL_HOST_PASSWORD=whatever your host password is
+DEBUG=True (if you want debugging on)
+```
+Debug should be off for production
 
+#### In the root folder, create a file named .gitignore and fill it out with this:
+```
+*.pyc
+__pycache__/
+db.sqlite3
+.env
 ```
 
 ### Set Up the Database:
 
-#### Apply migrations to initialize your database schema:
+#### Make & Apply migrations to initialize your database schema:
 ```
-python manage.py migrate
-```
-### Run the Development Server:
-```
-python manage.py runserver
-```
-You can now navigate to http://127.0.0.1:8000/ in your browser to see the PulsePoint application.
-
-### Features
-#### Mood Tracker: 
-Allows users to record their moods over time and view trends.
-
-#### Community: 
-Connect, share, and discuss with a community of users.
-
-#### Resources:
-Allows users to get the help they need.
-
-### License:
-This project is licensed under the Apache License - please look at the LICENSE.txt file for details.
-
-
-### Set Up the Database:
-
-#### Apply migrations to initialize your database schema:
-```
+python manage.py makemigrations
 python manage.py migrate
 ```
 ### Run the Development Server:

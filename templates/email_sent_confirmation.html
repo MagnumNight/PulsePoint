@@ -1,6 +1,8 @@
 {% extends "base.html" %}
 {% block title %}Reset Link{% endblock %}
 {% block content %}
+
+    <!-- Notification section -->
     <div class="quality_area">
         <div class="container">
             <div class="row justify-content-center">
@@ -16,10 +18,12 @@
         </div>
     </div>
 
+    <!-- Back to homepage button section -->
     <div class="container mt-4">
         <div class="row justify-content-center">
             <div class="col-lg-8">
                 <div class="center-button-container">
+                    <!-- Link to the homepage -->
                     <a href="{% url 'root_home' %}" class="btn btn-pulse">Back to Homepage</a>
                 </div>
             </div>

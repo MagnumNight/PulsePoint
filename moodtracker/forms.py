@@ -2,6 +2,7 @@ from django import forms
 from .models import Questionnaire, MoodData
 
 
+# Class: QuestionnaireForm - Django form for questionnaire model
 class QuestionnaireForm(forms.ModelForm):
     class Meta:
         model = Questionnaire
@@ -19,6 +20,7 @@ class QuestionnaireForm(forms.ModelForm):
         ]
 
 
+# Class: MoodDataForm - Django form for mood data model
 class MoodDataForm(forms.ModelForm):
     class Meta:
         model = MoodData

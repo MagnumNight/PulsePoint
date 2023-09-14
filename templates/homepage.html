@@ -6,18 +6,17 @@
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-lg-6">
-                    <div class="section_title mb-55 text-center">
+                    <div class="section_title mb-5 text-center">
+                        <!-- Welcome  message -->
                         <h3>Welcome to PulsePoint</h3>
                         <p>Your digital sanctuary for emotional well-being.</p>
-                        <p><blockquote>
-                            {{ quote }}
-                        </blockquote></p>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
+    <!-- Main content wrapper-->
     <div class="container-wrap" style="margin-top: -150px; margin-bottom: 100px;">
         <div class="container">
             <div class="row d-flex align-items-stretch">
@@ -25,6 +24,7 @@
                 <!-- Video Embed Section -->
                 <div class="col-lg-7 text-center">
                     <div class="video-wrapper">
+                        <!-- Embedded YouTube video-->
                         <iframe style="display: block; margin: auto;" width="100%" height="315"
                                 src="https://www.youtube.com/embed/BpzVvUGfJeA"
                                 allow="accelerometer; autoplay; clipboard-write;
@@ -34,16 +34,21 @@
                 </div>
 
                 <!-- Daily Quote Box -->
-                <div class="col-lg-5 d-flex align-items-stretch">
+                <div class="col-5">
                     <div class="card h-100">
+                        <div class="card-header"> <!-- Added this div for the red strip -->
+                            <h3 class="card-title text-center">Daily Quote</h3>
+                        </div>
+                        <div class="blue-bar"></div> <!-- Added this div for the blue bar -->
                         <div class="card-body">
-                            <h5 class="card-title text-center">Daily Quote</h5>
-                            <p class="card-text text-center"><blockquote>
+                            <p class="card-text">
+                            <blockquote>
                                 {{ quote }}
-                            </blockquote></p></p>
+                            </blockquote>
                         </div>
                     </div>
                 </div>
+
             </div>
 
             <!-- About section -->
