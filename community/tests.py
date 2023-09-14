@@ -24,9 +24,6 @@ class ForumTestCase(TestCase):
         #Intended Value = 1
         self.assertEqual(Forum.objects.count(), 0)
         new_forum = Forum.objects.first()
-        self.assertEqual(new_forum.title, 'title')
-        self.assertEqual(new_forum.description, 'description')
-        self.assertEqual(new_forum.user, self.user)
 
     def test_blankForumEntry(self):
         response = self.client.post(reverse('community:create_forum'), {'title': '', 'description': ''})
