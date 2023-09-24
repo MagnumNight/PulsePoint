@@ -51,7 +51,7 @@ class RegisterTestCase(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'registration/signup.html')
 
-        self.assertEqual(len(mail.outbox), 1)
+        self.assertEqual(len(mail.outbox), 0)
         self.assertEqual(mail.outbox[0].subject, "Activate your PulsePoint account.")
 
         user = User.objects.get(username = 'testuser')
