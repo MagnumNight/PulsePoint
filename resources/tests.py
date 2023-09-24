@@ -24,7 +24,7 @@ class ResourceTestCase(TestCase):
         self.assertContains(response, "Obsessive Compulsive Disorder")
         self.assertContains(response, "https://iocdf.org/about-ocd/")
 
-        self.assertContains(response, "Major Depressive Disorder")
+        self.assertContains(response, "Major <br>Depressive Disorder")
         self.assertContains(response, "https://www.psychiatry.org/patients-families/depression/what-is-depression")
 
         self.assertContains(response, "Attention-Deficit Hyperactivity Disorder")
