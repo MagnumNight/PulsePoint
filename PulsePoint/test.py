@@ -1,6 +1,8 @@
 from django.test import TestCase
 from django.contrib.auth.models import User
 from django.urls import reverse
+from django.core import mail
+from .tokens import account_activation_token, password_reset_token
 
 class LoginTestCase(TestCase):
     
