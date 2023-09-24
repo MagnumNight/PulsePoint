@@ -47,7 +47,7 @@ class RegisterTestCase(TestCase):
     def test_email_verification(self):
         response = self.client.post(reverse('signup'), {'first_name': 'first', 'last_name': 'last', 'username': 'testuser', 'email':'testing@gmail.com', 'password1': 'testing1234!', 'password2': 'testing1234!'})
         self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, 'registration/email_confirmation.html')
+        self.assertTemplateUsed(response, 'registration/signup.html')
 
         self.assertEqual(len(mail.outbox), 1)
         self.assertEqual(mail.outbox[0].subject, "Activate your PulsePoint account.")
