@@ -3,9 +3,9 @@ from community.forms import ForumForm, PostForm
 from .models import Forum
 from django.contrib import messages
 
+
 # Function: home - Render the home page with all forums
 def home(request):
-
     forums = Forum.objects.all().order_by("-date_created")
     return render(request, "community/home.html", {"forums": forums})
 
@@ -29,6 +29,7 @@ def create_forum(request):
     else:
         messages.info(request, "You must be logged in to create a forum.")
         return redirect("community:home")
+
 
 # Function: forum_detail - Render the forum detail page
 def forum_detail(request, forum_id):
