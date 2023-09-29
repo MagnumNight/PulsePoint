@@ -30,10 +30,12 @@ def root_homepage(request):
     data = url
 
     if data:
-        quote = data[0]['q']  # Assuming the quote is stored under key 'q' in the API response
+        quote = data[0][
+            "q"
+        ]  # Assuming the quote is stored under key 'q' in the API response
     else:
         quote = "Unable to fetch a quote at the moment."
-    return render(request, "homepage.html", {'quote': quote})
+    return render(request, "homepage.html", {"quote": quote})
 
 
 # Function: signup - Renders signup page
@@ -132,6 +134,17 @@ def account_settings(request):
 
             messages.success(request, "Your information has been successfully updated.")
             return redirect("account_settings")
+        else:
+            # Check for non-unique email/username
+            if "username" in form.errors:
+                messages.error(
+                    request, "The username is already in use. Please choose another."
+                )
+            if "email" in form.errors:
+                messages.error(
+                    request, "The email is already in use. Please choose another."
+                )
+            return redirect("account_settings")
     # If user does not submit account settings form, go back
     else:
         form = UserSettingsForm(instance=request.user)
@@ -176,21 +189,28 @@ def password_reset_view(request):
     # If user submits password reset form, send password reset email
     if request.method == "POST":
         email = request.POST.get("email")
-        user = User.objects.get(email=email)
-        if user:
-            current_site = get_current_site(request)
-            mail_subject = "Reset your password"
-            message = render_to_string(
-                "password_reset_email.html",
-                {
-                    "user": user,
-                    "domain": current_site.domain,
-                    "uid": urlsafe_base64_encode(force_bytes(user.pk)),
-                    "token": password_reset_token.make_token(user),
-                },
+        try:
+            user = User.objects.get(email=email)
+        except User.DoesNotExist:
+            return render(
+                request,
+                "error_page.html",
+                {"error_message": "This email is not registered in our system."},
             )
-            send_mail(mail_subject, message, "pulsepointregister@gmail.com", [email])
-            return render(request, "email_sent_confirmation.html")
+
+        current_site = get_current_site(request)
+        mail_subject = "Reset your password"
+        message = render_to_string(
+            "password_reset_email.html",
+            {
+                "user": user,
+                "domain": current_site.domain,
+                "uid": urlsafe_base64_encode(force_bytes(user.pk)),
+                "token": password_reset_token.make_token(user),
+            },
+        )
+        send_mail(mail_subject, message, "pulsepointregister@gmail.com", [email])
+        return render(request, "email_sent_confirmation.html")
     return render(request, "password_reset_form.html")
 
 
@@ -223,7 +243,7 @@ def password_reset_confirm(request, uidb64, token):
         return render(
             request,
             "error_page.html",
-            {"message": "Password reset link is invalid or has expired."},
+            {"error_message": "Password reset link is invalid or has expired."},
         )
 
 
