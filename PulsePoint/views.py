@@ -21,10 +21,12 @@ def root_homepage(request):
     data = url
 
     if data:
-        quote = data[0]['q']  # Assuming the quote is stored under key 'q' in the API response
+        quote = data[0][
+            "q"
+        ]  # Assuming the quote is stored under key 'q' in the API response
     else:
         quote = "Unable to fetch a quote at the moment."
-    return render(request, "homepage.html", {'quote': quote})
+    return render(request, "homepage.html", {"quote": quote})
 
 
 # Function: signup - Renders signup page
@@ -119,6 +121,17 @@ def account_settings(request):
             )  # Keep the user logged in after a password change
 
             messages.success(request, "Your information has been successfully updated.")
+            return redirect("account_settings")
+        else:
+            # Check for non-unique email/username
+            if "username" in form.errors:
+                messages.error(
+                    request, "The username is already in use. Please choose another."
+                )
+            if "email" in form.errors:
+                messages.error(
+                    request, "The email is already in use. Please choose another."
+                )
             return redirect("account_settings")
     # If user does not submit account settings form, go back
     else:
