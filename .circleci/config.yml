@@ -44,35 +44,9 @@ jobs:
             python manage.py makemigrations
             python manage.py migrate
             python manage.py test
-  build:
-    working_directory: ~/platform
-    docker:
-      - image: cimg/python:3.10.2
-    steps:
-      - checkout
-      - run:
-          name: Virtual Machine
-          command: |
-            ls -l
-            python -m venv venv
-            . venv/bin/activate
-            pip install -r requirements.txt
-            pip install django-utils-six
-      - run:
-          name: Run migrate
-          command: |
-            . venv/bin/activate
-            python manage.py migrate --skip-checks
 
-      - run:
-          name: Run server
-          command: |
-            . venv/bin/activate
-            python manage.py runserver
-            no_output_timeout: 30s
 
-  build-docker:
-      parallelism: 2
+  update-docker:
       docker:
         - image: cimg/python:3.10.2
       steps:
@@ -82,8 +56,8 @@ jobs:
         - run:
             name: Docker Image
             command: |
-            pip install --upgrade pip
-            docker build -t pulsepoint:latest .
+            docker tag pulsepoint:latest kifill1998/pulsepoint:latest
+            docker push kifill1998/pulsepoint:latest
 
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/configuration-reference/#workflows
@@ -92,4 +66,4 @@ workflows:
     # Inside the workflow, you define the jobs you want to run.
     jobs:
       - build-and-test
-      - build-docker
+      - update-docker
