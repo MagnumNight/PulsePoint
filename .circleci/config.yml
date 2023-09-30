@@ -57,7 +57,7 @@ jobs:
         - run:
             name: Docker Image
             command: |
-            docker build -t pulsepoint:latest .
+                docker build -t pulsepoint:latest .
 
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/configuration-reference/#workflows
