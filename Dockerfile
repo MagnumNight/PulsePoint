@@ -11,6 +11,9 @@ WORKDIR /PulsePoint
 # Copy the requirements file into the container at /app
 COPY requirements.txt /PulsePoint/
 
+# Upgrade pip to the latest version
+RUN pip install --upgrade pip
+
 # Install any needed packages specified in requirements.txt
 RUN pip install -r requirements.txt
 
