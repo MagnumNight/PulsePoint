@@ -37,6 +37,7 @@ jobs:
           name: Run tests
           # This assumes pytest is installed via the install-package step above
           command: |
+            docker build -t pulsepoint:latest .
             python -m venv venv
             . venv/bin/activate
             python -m pip install pytest
@@ -46,7 +47,7 @@ jobs:
             python manage.py test
 
 
-  update-docker:
+  build-docker:
       docker:
         - image: cimg/python:3.10.2
       steps:
@@ -56,8 +57,7 @@ jobs:
         - run:
             name: Docker Image
             command: |
-              docker tag pulsepoint:latest kifill1998/pulsepoint:latest
-              docker push kifill1998/pulsepoint:latest
+            docker build -t pulsepoint:latest .
 
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/configuration-reference/#workflows
@@ -66,4 +66,4 @@ workflows:
     # Inside the workflow, you define the jobs you want to run.
     jobs:
       - build-and-test
-      - update-docker
+      #- build-docker
