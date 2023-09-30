@@ -72,6 +72,7 @@ jobs:
             no_output_timeout: 30s
 
   build-docker:
+      parallelism: 2
       docker:
         - image: cimg/python:3.10.2
       steps:
