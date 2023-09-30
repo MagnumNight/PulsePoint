@@ -56,8 +56,8 @@ jobs:
         - run:
             name: Docker Image
             command: |
-            docker tag pulsepoint:latest kifill1998/pulsepoint:latest
-            docker push kifill1998/pulsepoint:latest
+              docker tag pulsepoint:latest kifill1998/pulsepoint:latest
+              docker push kifill1998/pulsepoint:latest
 
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/configuration-reference/#workflows
