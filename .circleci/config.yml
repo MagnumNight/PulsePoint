@@ -33,13 +33,10 @@ jobs:
           pkg-manager: pip
           # app-dir: ~/project/package-directory/  # If your requirements.txt isn't in the root directory.
           # pip-dependency-file: test-requirements.txt  # if you have a different name for your requirements file, maybe one that combines your runtime and test requirements.
-      - setup_remote_docker:
-          version: 20.10.7
       - run:
           name: Run tests
           # This assumes pytest is installed via the install-package step above
           command: |
-            docker build -t pulsepoint:latest .
             python -m venv venv
             . venv/bin/activate
             python -m pip install pytest
