@@ -1,11 +1,13 @@
 from django.core.management.base import BaseCommand
 from django.core.mail import send_mail
+from django.contrib.auth.models import User
 import requests
+import time
 
 class Command(BaseCommand):
     help = "Send a daily quote to registered users."
 
-    def handle(self, *args, **kwargs):
+    def send_daily_quote(self, *args, **kwargs):
         api_url = "https://zenquotes.io/api/random"
         response = requests.get(api_url)
         if response.status_code == 200:
@@ -20,3 +22,8 @@ class Command(BaseCommand):
                 send_mail(subject, message, from_email, [recipent_email])
         else:
             self.stdout.write(self.style.ERROR("Failed to fetch a quote from the API."))
+
+    def handle(self, *args, **options):
+        while True:
+            self.send_daily_quote()
+            time.sleep(24 * 60 * 60)
