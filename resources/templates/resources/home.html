@@ -19,7 +19,7 @@
             <!-- Start of the Body section  -->
             <div class="row">
                 <!-- Loop through the resources and display them -->
-                {% for _ in "123456" %}
+                {% for _ in "123456789012" %}
                     <div class="col-lg-4 col-md-6">
 
 
@@ -138,7 +138,7 @@
                             </a>
                             <!-- If the counter is 6, display the sixth resource -->
                             <!-- ADHD -->
-                        {% else %}
+                        {% elif forloop.counter == 6 %}
                             <a href="https://www.nimh.nih.gov/health/topics/attention-deficit-hyperactivity-disorder-adhd"
                                class="box-link">
                                 <div class="single_quality">
@@ -153,6 +153,143 @@
                                         <div style="margin-top: 1rem;">
                                             <iframe style="display: block; margin: auto;" width="320" height="180"
                                                     src="https://www.youtube.com/embed/5l2RIOhDXvU?si=qW3bY_rZvIQIR_lx"
+                                                    allowfullscreen></iframe>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                            <!-- If the counter is 7, display the seventh resource -->
+                            <!-- Social Anxiety -->
+                        {% elif forloop.counter == 7 %}
+                            <a href="https://my.clevelandclinic.org/health/diseases/22709-social-anxiety"
+                               class="box-link">
+                                <div class="single_quality">
+                                    <div class="icon">
+                                        <i class="fa-solid fa-user-group" aria-hidden="true"></i>
+                                    </div>
+                                    <div style="display: flex; flex-direction: column;
+                                    justify-content: space-between; align-items: center;">
+                                        <h3 class="card-title text-center">Social Anxiety</h3>
+                                        <p class="card-text text-center">Social anxiety causes fear and anxiety in
+                                            social situations. Learn how to manage it.</p>
+                                        <div style="margin-top: 1rem;">
+                                            <iframe style="display: block; margin: auto;" width="320" height="180"
+                                                    src="https://www.youtube.com/embed/VdoSgPRe_gw?si=p_rh21r8CiDBaZm0"
+                                                    allowfullscreen></iframe>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                            <!-- If the counter is 8, display the eighth resource -->
+                            <!-- Dravent Syndrome -->
+                        {% elif forloop.counter == 8 %}
+                            <a href="https://www.ninds.nih.gov/health-information/disorders/dravet-syndrome"
+                               class="box-link">
+                                <div class="single_quality">
+                                    <div class="icon">
+                                        <i class="fa-solid fa-user-doctor" aria-hidden="true"></i>
+                                    </div>
+                                    <div style="display: flex; flex-direction: column;
+                                    justify-content: space-between; align-items: center;">
+                                        <h3 class="card-title text-center">Dravent Syndrome</h3>
+                                        <p class="card-text text-center">Learn about Dravent Syndrome and find help to
+                                            control symptoms. </p>
+                                        <div style="margin-top: 1rem;">
+                                            <iframe style="display: block; margin: auto;" width="320" height="180"
+                                                    src="https://www.youtube.com/embed/ZHb8KmSZLKk?si=qRwNb3gayV9ULlGi"
+                                                    allowfullscreen></iframe>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                            <!-- If the counter is 9, display the ninth resource -->
+                            <!-- Schizophrenia -->
+                        {% elif forloop.counter == 9 %}
+                            <a href="https://www.samhsa.gov/mental-health/schizophrenia"
+                               class="box-link">
+                                <div class="single_quality">
+                                    <div class="icon">
+                                        <i class="fa-solid fa-head-side-virus" aria-hidden="true"></i>
+                                    </div>
+                                    <div style="display: flex; flex-direction: column;
+                                    justify-content: space-between; align-items: center;">
+                                        <h3 class="card-title text-center">Schizophrenia</h3>
+                                        <p class="card-text text-center">Schizophrenia can exert control over your
+                                            thoughts and interfere with daily functions.</p>
+                                        <div style="margin-top: 1rem;">
+                                            <iframe style="display: block; margin: auto;" width="320" height="180"
+                                                    src="https://www.youtube.com/embed/u3FES9W8P04?si=UZQyjVSyFD3mH4Wz"
+                                                    allowfullscreen></iframe>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                            <!-- If the counter is 10, display the tenth resource -->
+                            <!-- Borderline Personality Disorder -->
+                        {% elif forloop.counter == 10 %}
+                            <a href="https://www.nimh.nih.gov/health/publications/borderline-personality-disorder"
+                               class="box-link">
+                                <div class="single_quality">
+                                    <div class="icon">
+                                        <i class="fa-solid fa-people-pulling" aria-hidden="true"></i>
+                                    </div>
+                                    <div style="display: flex; flex-direction: column;
+                                    justify-content: space-between; align-items: center;">
+                                        <h3 class="card-title text-center">Borderline Personality Disorder</h3>
+                                        <p class="card-text text-center">BPD severely impacts a person’s ability to
+                                            regulate their emotions. It often occurs with other mental illnesses, such
+                                            as PTSD. </p>
+                                        <div style="margin-top: 1rem;">
+                                            <iframe style="display: block; margin: auto;" width="320" height="180"
+                                                    src="https://www.youtube.com/embed/6TS4d-zqRFA?si=sm1X9almf3x94D_x"
+                                                    allowfullscreen></iframe>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+
+                            <!-- If the counter is 11, display the eleventh resource -->
+                            <!-- Dementia -->
+                        {% elif forloop.counter == 11 %}
+                            <a href="https://www.nia.nih.gov/health/what-is-dementia"
+                               class="box-link">
+                                <div class="single_quality">
+                                    <div class="icon">
+                                        <i class="fa-solid fa-brain" aria-hidden="true"></i>
+                                    </div>
+                                    <div style="display: flex; flex-direction: column;
+                                    justify-content: space-between; align-items: center;">
+                                        <h3 class="card-title text-center">Dementia</h3>
+                                        <p class="card-text text-center"><br>Dementia affects millions of people and is
+                                            more common as people grow older. There are different forms of dementia,
+                                            including Alzheimer’s disease.</p>
+                                        <div style="margin-top: 1.7rem;">
+                                            <iframe style="display: block; margin: auto;" width="320" height="180"
+                                                    src="https://www.youtube.com/embed/fmaEql66gB0?si=fLw2SzpGLmbi7r9t"
+                                                    allowfullscreen></iframe>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+
+                            <!-- If the counter is 12, display the twelfth resource -->
+                            <!-- Seasonal Affective Disorder -->
+                        {% else %}
+                            <a href="https://www.samhsa.gov/mental-health/schizophrenia"
+                               class="box-link">
+                                <div class="single_quality">
+                                    <div class="icon">
+                                        <i class="fa-solid fa-cloud-showers-heavy" aria-hidden="true"></i>
+                                    </div>
+                                    <div style="display: flex; flex-direction: column;
+                                    justify-content: space-between; align-items: center;">
+                                        <h3 class="card-title text-center">Seasonal Affective Disorder</h3>
+                                        <p class="card-text text-center">If you have noticed significant changes in your
+                                            mood and behavior when the seasons change, you may be suffering from
+                                            SAD.</p>
+                                        <div style="margin-top: 2.6rem;">
+                                            <iframe style="display: block; margin: auto;" width="320" height="180"
+                                                    src="https://www.youtube.com/embed/Itqn7i3KbAw?si=FjkeCY_k3WcXIrq-"
                                                     allowfullscreen></iframe>
                                         </div>
                                     </div>

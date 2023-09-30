@@ -22,7 +22,7 @@ from .views import send_email
 
 # Variable: urlpatterns - The URL patterns for the project as a whole
 urlpatterns = [
-    path("admin/", admin.site.urls), # Admin site
+    path("admin/", admin.site.urls),  # Admin site
     path(
         "", views.root_homepage, name="root_home"
     ),  # Root homepage for the entire project

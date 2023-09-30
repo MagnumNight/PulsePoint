@@ -116,6 +116,22 @@ class UserSettingsForm(forms.ModelForm):
             if new_password1 != new_password2:
                 self.add_error("new_password2", "Passwords do not match")
 
+    # Function: save - Updates user details and password if necessary
+    def save(self, commit=True):
+        user = super(UserSettingsForm, self).save(
+            commit=False
+        )  # Fetch user instance but don't save it yet
+        new_password1 = self.cleaned_data.get("new_password1")
+        new_password2 = self.cleaned_data.get("new_password2")
+
+        # Update password if it has been changed
+        if new_password1 and new_password2 and new_password1 == new_password2:
+            user.set_password(new_password1)
+
+        if commit:
+            user.save()
+        return user
+
 
 # Class: PasswordResetRequestForm - Django form for password reset request
 class PasswordResetForm(forms.ModelForm):
@@ -125,7 +141,7 @@ class PasswordResetForm(forms.ModelForm):
     new_password2 = forms.CharField(
         label="Confirm new password", widget=forms.PasswordInput, required=True
     )
-    
+
     # Class: Meta - Defines metadata for PasswordResetForm
     class Meta:
         model = User
