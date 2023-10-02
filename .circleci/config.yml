@@ -9,7 +9,7 @@ orbs:
   # Orb commands and jobs help you with common scripting around a language/tool
   # so you dont have to copy and paste it everywhere.
   # See the orb documentation here: https://circleci.com/developer/orbs/orb/circleci/python
-  python: circleci/python@1.5.0
+  python: circleci/python@2.1.1
 
 # Define a job to be invoked later in a workflow.
 # See: https://circleci.com/docs/configuration-reference/#jobs
@@ -41,33 +41,22 @@ jobs:
             . venv/bin/activate
             python -m pip install pytest
             pip install -r requirements.txt
+            python manage.py makemigrations
+            python manage.py migrate
             python manage.py test
-  build:
-    working_directory: ~/platform
-    docker:
-      - image: cimg/python:3.10.2
-    steps:
-      - checkout
-      - run:
-          name: Virtual Machine
-          command: |
-            ls -l
-            python -m venv venv
-            . venv/bin/activate
-            pip install -r requirements.txt
-            pip install django-utils-six
-      - run:
-          name: Run migrate
-          command: |
-            . venv/bin/activate
-            python manage.py migrate --skip-checks
 
-      - run:
-          name: Run server
-          command: |
-            . venv/bin/activate
-            python manage.py runserver
-            no_output_timeout: 30s
+
+  build-docker:
+      docker:
+        - image: cimg/python:3.10.2
+      steps:
+        - checkout
+        - setup_remote_docker:
+            version: 20.10.7
+        - run:
+            name: Docker Image
+            command: |
+                docker build -t pulsepoint:latest .
 
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/configuration-reference/#workflows
@@ -76,3 +65,4 @@ workflows:
     # Inside the workflow, you define the jobs you want to run.
     jobs:
       - build-and-test
+      #- build-docker
