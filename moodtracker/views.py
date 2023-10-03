@@ -96,6 +96,17 @@ def mood_graph_view(request):
     except Questionnaire.DoesNotExist:
         initial_questionnaire = None
 
+    # Check if user has any mood data
+    has_mood_data = MoodData.objects.filter(user=request.user).exists()
+
+    # If user has neither filled out the questionnaire nor has any mood data, reroute to error page
+    if not initial_questionnaire and not has_mood_data:
+        context = {
+            "error_message": "You need to fill out the initial questionnaire or update your mood before viewing the "
+                             "mood graph."
+        }
+        return render(request, "error_page.html", context)
+
     # If user has filled out questionnaire, add initial data to mood metrics
     if initial_questionnaire:
         initial_data = {
@@ -113,7 +124,7 @@ def mood_graph_view(request):
 
         mood_dates.insert(0, "Initial")
 
-    # If user has not filled out questionnaire, set initial data to empty
+    # If user has not filled out questionnaire, keep empty
     else:
         initial_data = {}
 
