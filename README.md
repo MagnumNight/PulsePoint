@@ -37,7 +37,7 @@ pip install -r requirements.txt
 
 #### In your terminal, type in:
 ```
-from django.core.management.utils import get_random_secret_key
+python -c from django.core.management.utils import get_random_secret_key
 print(get_random_secret_key())
 ``` 
 This will print out a new secret key that you will use in the next step.
