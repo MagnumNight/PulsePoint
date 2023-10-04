@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 import requests
 import time
 
+
 class Command(BaseCommand):
     help = "Send a daily quote to registered users."
 
