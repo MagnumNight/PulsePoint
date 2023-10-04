@@ -101,10 +101,8 @@ def delete_account(request):
 
 
 @login_required
-# Function: account_settings - Change password
-def account_settings(request):
-    # If user submits account settings form, save user information
-    if request.method == "POST":
+def update_info(request):
+    if request.method == 'POST':
         form = UserSettingsForm(request.POST, instance=request.user)
         if form.is_valid():
             user = form.save(commit=False)
@@ -116,27 +114,21 @@ def account_settings(request):
                 user.set_password(new_password1)
 
             user.save()
-            update_session_auth_hash(
-                request, user
-            )  # Keep the user logged in after a password change
+            update_session_auth_hash(request, user)  # Keep the user logged in after a password change
 
             messages.success(request, "Your information has been successfully updated.")
             return redirect("account_settings")
         else:
             # Check for non-unique email/username
             if "username" in form.errors:
-                messages.error(
-                    request, "The username is already in use. Please choose another."
-                )
+                messages.error(request, "The username is already in use. Please choose another.")
             if "email" in form.errors:
-                messages.error(
-                    request, "The email is already in use. Please choose another."
-                )
-            return redirect("account_settings")
-    # If user does not submit account settings form, go back
+                messages.error(request, "The email is already in use. Please choose another.")
+            # Do not redirect, render the template and pass the invalid form
+            return render(request, 'registration/update_info.html', {'form': form})
     else:
         form = UserSettingsForm(instance=request.user)
-    return render(request, "registration/settings.html", {"form": form})
+    return render(request, 'registration/update_info.html', {'form': form})
 
 
 # Function: send_email - Sends registration email
@@ -150,6 +142,11 @@ def send_email(request):
         send_mail(subject, message, from_email, recipient_list)
 
         return redirect("thank_you")
+
+
+@login_required
+def account_settings(request):
+    return render(request, "registration/settings.html")
 
 
 # Function: thank_you - Renders thank you page

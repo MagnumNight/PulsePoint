@@ -1,0 +1,92 @@
+{% extends "base.html" %}
+{% block title %}Update Information{% endblock %}
+{% block content %}
+
+    <!-- Header section for updating information -->
+    <div class="quality_area">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-6">
+                    <div class="section_title mb-55 text-center">
+                        <h3>Update Your Account Information</h3>
+                        <i class="fa-solid fa-user-edit fa-5x"
+                           style="color: #38B6FF; margin-top: 30px; margin-bottom: 10px;"></i>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Form section for updating information -->
+            <form method="post" action="{% url 'update_info' %}">
+                {% csrf_token %}
+
+                <!-- Username -->
+                {% if form.username.errors %}
+                    <div class="error">
+                        {{ form.username.errors|first }}
+                    </div>
+                {% endif %}
+                <div class="form-group">
+                    <label for="id_username">Username:</label>
+                    <input type="text" class="form-control" id="id_username" name="username"
+                           placeholder="Enter username" value="{{ form.username.value|default:'' }}">
+                </div>
+
+                <!-- Email -->
+                {% if form.email.errors %}
+                    <div class="error">
+                        {{ form.email.errors|first }}
+                    </div>
+                {% endif %}
+                <div class="form-group">
+                    <label for="id_email">Email:</label>
+                    <input type="email" class="form-control" id="id_email" name="email"
+                           placeholder="Enter email" value="{{ form.email.value|default:'' }}">
+                </div>
+
+                <!-- Current Password -->
+                {% if form.current_password.errors %}
+                    <div class="error">
+                        {{ form.current_password.errors|first }}
+                    </div>
+                {% endif %}
+                <div class="form-group">
+                    <label for="id_current_password">Current Password:</label>
+                    <input type="password" class="form-control" id="id_current_password"
+                           name="current_password"
+                           placeholder="Enter current password">
+                </div>
+
+                <!-- New Password -->
+                {% if form.new_password1.errors %}
+                    <div class="error">
+                        {{ form.new_password1.errors|first }}
+                    </div>
+                {% endif %}
+                <div class="form-group">
+                    <label for="id_new_password1">New Password:</label>
+                    <input type="password" class="form-control" id="id_new_password1"
+                           name="new_password1"
+                           placeholder="Enter new password">
+                </div>
+
+                <!-- Confirm New Password -->
+                {% if form.new_password2.errors %}
+                    <div class="error">
+                        {{ form.new_password2.errors|first }}
+                    </div>
+                {% endif %}
+                <div class="form-group">
+                    <label for="id_new_password2">Confirm New Password:</label>
+                    <input type="password" class="form-control" id="id_new_password2"
+                           name="new_password2"
+                           placeholder="Confirm new password">
+                </div>
+
+                <br/>
+                <button type="submit" class="btn btn-pulse mb-4">Update Info</button>
+                <a href="{% url 'account_settings' %}" class="btn btn-secondary mb-4">Cancel</a>
+            </form>
+        </div>
+    </div>
+
+{% endblock %}
