@@ -4,7 +4,7 @@ charset-normalizer==3.2.0
 Django==4.2.4
 django-utils-six==2.0
 idna==3.4
-numpy==1.25.2
+numpy
 packaging==23.1
 pandas==2.0.3
 plotly==5.16.1
