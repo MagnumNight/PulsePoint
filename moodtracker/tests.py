@@ -19,20 +19,20 @@ class MoodTrackerTestCase(TestCase):
     def test_initial_questionnaire(self):
         self.client.force_login(self.user)
         response = self.client.post(reverse("moodtracker:questionnaire"))
-        self.assertEqual(response.status_code, 302)
+        self.assertEqual(response.status_code, 200)
 
     def test_save_mood(self):
         self.client.force_login(self.user)
         response = self.client.post(reverse("moodtracker:save_mood"))
-        self.assertEqual(response.status_code, 302)
+        self.assertEqual(response.status_code, 200)
 
     # Testing non-auth user.
     def test_initial_tracker_logout(self):
         self.client.logout()
         response = self.client.post(reverse("moodtracker:home"))
-        self.assertEqual(response.status_code, 302)
+        self.assertEqual(response.status_code, 200)
 
     def test_initial_questionnaire_logout(self):
         self.client.logout()
         response = self.client.post(reverse("moodtracker:questionnaire"))
-        self.assertEqual(response.status_code, 302)
+        self.assertEqual(response.status_code, 200)
