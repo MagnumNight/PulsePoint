@@ -80,6 +80,7 @@ def activate(request, uidb64, token):
     if user is not None and account_activation_token.check_token(user, token):
         user.is_active = True
         user.save()
+        user.backend = "django.contrib.auth.backends.ModelBackend"
         login(request, user)
         # quote = requests.get(API_ENDPOINT_URL + "/today").json()
         messages.success(

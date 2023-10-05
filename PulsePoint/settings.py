@@ -149,7 +149,7 @@ SESSION_COOKIE_AGE = 600
 SESSION_EXPIRE_AT_BROWSER_CLOSE = True
 
 # Cookie-based sessions
-SESSION_ENGINE = "django.contrib.sessions.backends.cache"
+SESSION_ENGINE = "django.contrib.sessions.backends.db"
 
 # Cookie-based messages
 MESSAGE_STORAGE = "django.contrib.messages.storage.cookie.CookieStorage"
