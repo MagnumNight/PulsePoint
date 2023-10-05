@@ -1,3 +1,5 @@
+from importlib import import_module
+from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth import login, logout, update_session_auth_hash
 from django.contrib.auth.decorators import login_required
@@ -10,6 +12,10 @@ from django.utils.encoding import force_bytes
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from .forms import UserRegisterForm, UserSettingsForm, PasswordResetForm
 from .tokens import account_activation_token, password_reset_token
+from django.contrib.auth.signals import user_logged_in
+from django.contrib.sessions.models import Session
+from django.dispatch import receiver
+from django.utils import timezone
 import requests
 
 API_ENDPOINT_URL = "https://zenquotes.io/api"
@@ -102,7 +108,7 @@ def delete_account(request):
 
 @login_required
 def update_info(request):
-    if request.method == 'POST':
+    if request.method == "POST":
         form = UserSettingsForm(request.POST, instance=request.user)
         if form.is_valid():
             user = form.save(commit=False)
@@ -114,21 +120,27 @@ def update_info(request):
                 user.set_password(new_password1)
 
             user.save()
-            update_session_auth_hash(request, user)  # Keep the user logged in after a password change
+            update_session_auth_hash(
+                request, user
+            )  # Keep the user logged in after a password change
 
             messages.success(request, "Your information has been successfully updated.")
             return redirect("account_settings")
         else:
             # Check for non-unique email/username
             if "username" in form.errors:
-                messages.error(request, "The username is already in use. Please choose another.")
+                messages.error(
+                    request, "The username is already in use. Please choose another."
+                )
             if "email" in form.errors:
-                messages.error(request, "The email is already in use. Please choose another.")
+                messages.error(
+                    request, "The email is already in use. Please choose another."
+                )
             # Do not redirect, render the template and pass the invalid form
-            return render(request, 'registration/update_info.html', {'form': form})
+            return render(request, "registration/update_info.html", {"form": form})
     else:
         form = UserSettingsForm(instance=request.user)
-    return render(request, 'registration/update_info.html', {'form': form})
+    return render(request, "registration/update_info.html", {"form": form})
 
 
 # Function: send_email - Sends registration email
@@ -229,3 +241,24 @@ def password_reset_confirm(request, uidb64, token):
 # Function: password_reset_success - Renders password reset success page
 def password_reset_success(request):
     return render(request, "password_reset_success.html")
+
+
+# This should log the user out of all sessions, other than the active session
+@receiver(user_logged_in)
+def on_user_logged_in(request, **kwargs):
+    # Get the current session key
+    current_session_key = request.session.session_key
+
+    # Get all session keys
+    sessions = Session.objects.filter(expire_date__gt=timezone.now())
+
+    # Exclude the current session and delete the rest
+    for session in sessions:
+        if session.session_key != current_session_key:
+            # Decode session data
+            engine = import_module(settings.SESSION_ENGINE)
+            session_data = engine.SessionStore().decode(session.session_data)
+
+            # Check if session data contains user's id
+            if session_data.get("_auth_user_id") == str(request.user.id):
+                session.delete()

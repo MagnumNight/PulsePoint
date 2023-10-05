@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "axes",
     "moodtracker",
     "resources",
     "community",
@@ -58,6 +59,7 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "axes.middleware.AxesMiddleware",
 ]
 
 ROOT_URLCONF = "PulsePoint.urls"
@@ -143,4 +145,21 @@ STATICFILES_DIRS = [BASE_DIR / "static"]
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
+SESSION_COOKIE_AGE = 600
 SESSION_EXPIRE_AT_BROWSER_CLOSE = True
+
+# Cookie-based sessions
+SESSION_ENGINE = "django.contrib.sessions.backends.cache"
+
+# Cookie-based messages
+MESSAGE_STORAGE = "django.contrib.messages.storage.cookie.CookieStorage"
+
+AUTHENTICATION_BACKENDS = [
+    "axes.backends.AxesBackend",
+    "django.contrib.auth.backends.ModelBackend",
+]
+
+AXES_FAILURE_LIMIT = 5  # Number of login attempts allowed
+AXES_COOLOFF_TIME = (
+    0.083  # Time (in hours) to lock out the user after exceeding the attempts
+)
