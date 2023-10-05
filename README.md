@@ -50,14 +50,6 @@ DEBUG=True (if you want debugging on)
 ```
 Debug should be off for production
 
-#### In the root folder, create a file named .gitignore and fill it out with this:
-```
-*.pyc
-__pycache__/
-db.sqlite3
-.env
-```
-
 ### Set Up the Database:
 
 #### Make & Apply migrations to initialize your database schema:

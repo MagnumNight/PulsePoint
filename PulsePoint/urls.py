@@ -35,6 +35,7 @@ urlpatterns = [
     path("delete_account/", views.delete_account, name="delete_account"),  # Delete account
     path("signup/", views.signup, name="signup"),  # Sign up
     path("account/settings/", views.account_settings, name="account_settings"),  # Account settings
+    path('update_info/', views.update_info, name='update_info'),
     path("activate/<str:uidb64>/<str:token>/", views.activate, name="activate"),  # Activate account
     path("send_email/", send_email, name="send_email"),  # Send email
     path("thank_you/", views.thank_you, name="thank_you"),  # Thank you

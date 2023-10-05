@@ -1,3 +1,5 @@
+from importlib import import_module
+from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth import login, logout, update_session_auth_hash
 from django.contrib.auth.decorators import login_required
@@ -14,10 +16,17 @@ from django.utils.encoding import force_bytes
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from .forms import UserRegisterForm, UserSettingsForm, PasswordResetForm
 from .tokens import account_activation_token, password_reset_token
+<<<<<<< HEAD
 
 from itertools import chain
 from community.models import Forum, Post
 
+=======
+from django.contrib.auth.signals import user_logged_in
+from django.contrib.sessions.models import Session
+from django.dispatch import receiver
+from django.utils import timezone
+>>>>>>> 51f4f95159b34f33c62c38c8f7312b0d30d75d74
 import requests
 
 # Variable: API_ENDPOINT_URL - The URL for the API endpoint that returns a quote of the day
@@ -113,9 +122,7 @@ def delete_account(request):
 
 
 @login_required
-# Function: account_settings - Change password
-def account_settings(request):
-    # If user submits account settings form, save user information
+def update_info(request):
     if request.method == "POST":
         form = UserSettingsForm(request.POST, instance=request.user)
         if form.is_valid():
@@ -144,11 +151,11 @@ def account_settings(request):
                 messages.error(
                     request, "The email is already in use. Please choose another."
                 )
-            return redirect("account_settings")
-    # If user does not submit account settings form, go back
+            # Do not redirect, render the template and pass the invalid form
+            return render(request, "registration/update_info.html", {"form": form})
     else:
         form = UserSettingsForm(instance=request.user)
-    return render(request, "registration/settings.html", {"form": form})
+    return render(request, "registration/update_info.html", {"form": form})
 
 
 
@@ -165,6 +172,13 @@ def send_email(request):
         return redirect("thank_you")
 
 
+<<<<<<< HEAD
+=======
+@login_required
+def account_settings(request):
+    return render(request, "registration/settings.html")
+
+>>>>>>> 51f4f95159b34f33c62c38c8f7312b0d30d75d74
 
 # Function: thank_you - Renders thank you page
 def thank_you(request):
@@ -253,6 +267,7 @@ def password_reset_success(request):
     return render(request, "password_reset_success.html")
 
 
+<<<<<<< HEAD
 
 # Function: search_results - Renders search results page
 def search_results(request):
@@ -270,3 +285,24 @@ def search_results(request):
         
 
         
+=======
+# This should log the user out of all sessions, other than the active session
+@receiver(user_logged_in)
+def on_user_logged_in(request, **kwargs):
+    # Get the current session key
+    current_session_key = request.session.session_key
+
+    # Get all session keys
+    sessions = Session.objects.filter(expire_date__gt=timezone.now())
+
+    # Exclude the current session and delete the rest
+    for session in sessions:
+        if session.session_key != current_session_key:
+            # Decode session data
+            engine = import_module(settings.SESSION_ENGINE)
+            session_data = engine.SessionStore().decode(session.session_data)
+
+            # Check if session data contains user's id
+            if session_data.get("_auth_user_id") == str(request.user.id):
+                session.delete()
+>>>>>>> 51f4f95159b34f33c62c38c8f7312b0d30d75d74
