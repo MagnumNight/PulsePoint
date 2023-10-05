@@ -14,7 +14,7 @@ class MoodTrackerTestCase(TestCase):
     def test_initial_tracker(self):
         self.client.force_login(self.user)
         response = self.client.post(reverse("moodtracker:home"))
-        self.assertEqual(response.status_code, 302)
+        self.assertEqual(response.status_code, 200)
 
     def test_initial_questionnaire(self):
         self.client.force_login(self.user)
@@ -30,9 +30,9 @@ class MoodTrackerTestCase(TestCase):
     def test_initial_tracker_logout(self):
         self.client.logout()
         response = self.client.post(reverse("moodtracker:home"))
-        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.status_code, 302)
 
     def test_initial_questionnaire_logout(self):
         self.client.logout()
         response = self.client.post(reverse("moodtracker:questionnaire"))
-        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.status_code, 302)
